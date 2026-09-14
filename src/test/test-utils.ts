@@ -5,7 +5,10 @@ import { render, type RenderOptions } from '@testing-library/react'
 
 import { TestProvidersWrapper, type TestProvidersWrapperProps } from './test-providers'
 
-type WrapperOptions = Pick<TestProvidersWrapperProps, 'route' | 'queryClient' | 'withWorkspace'>
+type WrapperOptions = Pick<
+  TestProvidersWrapperProps,
+  'route' | 'queryClient' | 'withWorkspace' | 'withPortal'
+>
 
 type RenderWithProvidersOptions = Omit<RenderOptions, 'wrapper'> & WrapperOptions
 
@@ -14,10 +17,15 @@ function buildWrapper(options: WrapperOptions = {}) {
     route = '/',
     queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } }),
     withWorkspace = false,
+    withPortal = false,
   } = options
 
   return function Wrapper({ children }: { children: ReactNode }) {
-    return createElement(TestProvidersWrapper, { route, queryClient, withWorkspace }, children)
+    return createElement(
+      TestProvidersWrapper,
+      { route, queryClient, withWorkspace, withPortal },
+      children,
+    )
   }
 }
 
@@ -26,9 +34,9 @@ export function createWrapper(options: WrapperOptions = {}) {
 }
 
 export function renderWithProviders(ui: ReactElement, options: RenderWithProvidersOptions = {}) {
-  const { route, queryClient, withWorkspace, ...renderOptions } = options
+  const { route, queryClient, withWorkspace, withPortal, ...renderOptions } = options
   return render(ui, {
-    wrapper: buildWrapper({ route, queryClient, withWorkspace }),
+    wrapper: buildWrapper({ route, queryClient, withWorkspace, withPortal }),
     ...renderOptions,
   })
 }

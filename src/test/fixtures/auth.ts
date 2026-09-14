@@ -36,6 +36,14 @@ export function makeMeResponse(role: UserRole): MeResponse {
   }
 
   if (role === 'client') {
+    const activeClient = {
+      id: 10,
+      name: 'Acme Corp',
+      slug: 'acme-corp',
+      status: 'active',
+      ...timestamps,
+    }
+
     return {
       user,
       user_settings: { timezone: 'UTC', locale: 'en' },
@@ -48,17 +56,12 @@ export function makeMeResponse(role: UserRole): MeResponse {
           client_id: 10,
           user_id: user.id,
           role: 'primary',
+          client: activeClient,
           created_at: timestamps.created_at,
           updated_at: timestamps.updated_at,
         },
       ],
-      active_client: {
-        id: 10,
-        name: 'Acme Corp',
-        slug: 'acme-corp',
-        status: 'active',
-        ...timestamps,
-      },
+      active_client: activeClient,
     }
   }
 
@@ -140,6 +143,33 @@ export function makeReadOnlyMeResponse(): MeResponse {
       read_only: true,
       trial_ends_at: null,
     },
+  }
+}
+
+export function makeMultiClientMembershipMeResponse(): MeResponse {
+  const base = makeMeResponse('client')
+  const secondClient = {
+    id: 20,
+    name: 'Beta Inc',
+    slug: 'beta-inc',
+    status: 'active',
+    ...timestamps,
+  }
+
+  return {
+    ...base,
+    client_memberships: [
+      ...base.client_memberships,
+      {
+        id: 2,
+        client_id: 20,
+        user_id: base.user.id,
+        role: 'member',
+        client: secondClient,
+        created_at: timestamps.created_at,
+        updated_at: timestamps.updated_at,
+      },
+    ],
   }
 }
 

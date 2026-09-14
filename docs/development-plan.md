@@ -543,27 +543,36 @@
 
 ---
 
-## Phase 10 — Portal (P2)
+## Phase 10 — Portal (P2) ✅
 
 ### PO-01 — PortalProvider | **Done when:** `clientId` context; integration test
+- [x] `PortalProvider` + `usePortalContext`; persists `X-Client-Id`; integration test
 
 ### PO-02 — ClientSwitcher | **Done when:** Multi-client dropdown; component test
+- [x] `ClientSwitcher`; hidden for single membership; component test
 
 ### PO-03 — PortalLayout | **Done when:** Read-only shell; no write buttons; component test
+- [x] Top-nav `PortalLayout`; no mutation actions; component test
 
 ### PO-04 — Portal hooks | **API:** `/portal/*` | **Done when:** client, projects, invoices hooks + MSW tests
+- [x] `usePortalClient`, `usePortalProjects`, `usePortalInvoices` + MSW handlers/tests
 
 ### PO-05 — PortalDashboardPage | **Done when:** Profile card; four states; integration tests
+- [x] `ClientProfileCard`; loading/error/happy; integration tests
 
 ### PO-06 — PortalProjectsPage | **Done when:** Read-only table; integration tests
+- [x] `PortalProjectsTable`; read-only; four states; integration tests
 
 ### PO-07 — PortalInvoicesPage | **Done when:** Status filter; no drafts; integration tests
+- [x] Status filter (sent/paid/overdue); no draft/void options; integration tests
 
 ### PO-08 — RequireClient | **Done when:** Guard integration test
+- [x] `RequireClient` guard; redirects freelancer/admin; integration test
 
 ### PO-09 — Wire `/portal/*` | **Done when:** Routes + integration navigation test
+- [x] Routes wired; portal navigation integration test
 
-**Phase 10 exit:** Client sees read-only data only.
+**Phase 10 exit:** Client sees read-only data only. ✅
 
 ---
 

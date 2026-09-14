@@ -142,6 +142,43 @@ describe('AppRoutes', () => {
     })
   })
 
+  it('loads portal dashboard for authenticated client', async () => {
+    setToken('client-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/portal' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Dashboard' })).toBeInTheDocument()
+      expect(screen.getByText('Acme Corp')).toBeInTheDocument()
+    })
+  })
+
+  it('navigates between portal routes', async () => {
+    setToken('client-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/portal' })
+
+    await waitFor(() => {
+      expect(screen.getByText('Acme Corp')).toBeInTheDocument()
+    })
+
+    await userEvent.click(screen.getByRole('link', { name: 'Projects' }))
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Projects' })).toBeInTheDocument()
+      expect(screen.getByText('Website Redesign')).toBeInTheDocument()
+    })
+
+    await userEvent.click(screen.getByRole('link', { name: 'Invoices' }))
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Invoices' })).toBeInTheDocument()
+      expect(screen.getByText('INV-2026-0002')).toBeInTheDocument()
+    })
+  })
+
   it('renders 404 for unknown routes', () => {
     renderWithProviders(<AppRoutes />, { route: '/does-not-exist' })
     expect(screen.getByRole('heading', { name: 'Page not found' })).toBeInTheDocument()

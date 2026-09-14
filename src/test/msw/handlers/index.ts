@@ -5,6 +5,7 @@ import { clientMembersHandlers } from './client-members'
 import { clientsHandlers } from './clients'
 import { invoicesHandlers } from './invoices'
 import { membersHandlers } from './members'
+import { portalHandlers } from './portal'
 import { projectsHandlers } from './projects'
 import { settingsHandlers } from './settings'
 import { tasksHandlers } from './tasks'
@@ -22,5 +23,6 @@ export const handlers = [
   ...timeLogsHandlers,
   ...invoicesHandlers,
   ...membersHandlers,
+  ...portalHandlers,
   ...settingsHandlers,
 ]

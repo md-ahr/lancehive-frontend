@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { MemoryRouter } from 'react-router-dom'
 
 import { TooltipProvider } from '@/components/ui/tooltip'
+import { PortalProvider } from '@/features/Portal/components/PortalProvider'
 import { WorkspaceProvider } from '@/features/Workspace/components/WorkspaceProvider'
 
 export type TestProvidersWrapperProps = {
@@ -11,6 +12,7 @@ export type TestProvidersWrapperProps = {
   route?: string
   queryClient?: QueryClient
   withWorkspace?: boolean
+  withPortal?: boolean
 }
 
 export function TestProvidersWrapper({
@@ -18,8 +20,17 @@ export function TestProvidersWrapper({
   route = '/',
   queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } }),
   withWorkspace = false,
+  withPortal = false,
 }: TestProvidersWrapperProps) {
-  const content = withWorkspace ? <WorkspaceProvider>{children}</WorkspaceProvider> : children
+  let content = children
+
+  if (withWorkspace) {
+    content = <WorkspaceProvider>{content}</WorkspaceProvider>
+  }
+
+  if (withPortal) {
+    content = <PortalProvider>{content}</PortalProvider>
+  }
 
   return (
     <QueryClientProvider client={queryClient}>

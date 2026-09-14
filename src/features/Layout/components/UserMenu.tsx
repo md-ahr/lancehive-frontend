@@ -18,6 +18,7 @@ export function UserMenu() {
   const navigate = useNavigate()
 
   const userName = me.data?.user.name ?? 'Account'
+  const isClientUser = me.data?.user.role === 'client'
 
   const handleLogout = async () => {
     await logout.mutateAsync()
@@ -35,11 +36,15 @@ export function UserMenu() {
         }
       />
       <DropdownMenuContent align="end" className="w-48">
-        <DropdownMenuItem render={<Link to="/app/settings" />}>
-          <Settings className="size-4" />
-          Settings
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
+        {!isClientUser ? (
+          <>
+            <DropdownMenuItem render={<Link to="/app/settings" />}>
+              <Settings className="size-4" />
+              Settings
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+          </>
+        ) : null}
         <DropdownMenuItem onClick={handleLogout} disabled={logout.isPending}>
           <LogOut className="size-4" />
           {logout.isPending ? 'Signing out…' : 'Sign out'}

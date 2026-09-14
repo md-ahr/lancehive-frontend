@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { AuthLayout } from '@/features/Auth/components/AuthLayout'
 import { PersonaRedirect } from '@/features/Auth/components/PersonaRedirect'
 import { RequireAuth } from '@/features/Auth/components/RequireAuth'
+import { RequireClient } from '@/features/Auth/components/RequireClient'
 import { RequireFreelancer } from '@/features/Auth/components/RequireFreelancer'
 import { ForgotPasswordPage } from '@/features/Auth/pages/ForgotPasswordPage'
 import { LoginPage } from '@/features/Auth/pages/LoginPage'
@@ -16,6 +17,10 @@ import { DashboardPage } from '@/features/Layout/pages/DashboardPage'
 import { NotFoundPage } from '@/features/Layout/pages/NotFoundPage'
 import { PlaceholderPage } from '@/features/Layout/pages/PlaceholderPage'
 import { MembersPage } from '@/features/Members/pages/MembersPage'
+import { PortalLayout } from '@/features/Portal/components/PortalLayout'
+import { PortalDashboardPage } from '@/features/Portal/pages/PortalDashboardPage'
+import { PortalInvoicesPage } from '@/features/Portal/pages/PortalInvoicesPage'
+import { PortalProjectsPage } from '@/features/Portal/pages/PortalProjectsPage'
 import { ProjectDetailPage } from '@/features/Projects/pages/ProjectDetailPage'
 import { ProjectsPage } from '@/features/Projects/pages/ProjectsPage'
 import { UserSettingsPage } from '@/features/Settings/pages/UserSettingsPage'
@@ -49,8 +54,13 @@ export function AppRoutes() {
           </Route>
         </Route>
 
-        <Route path="/portal" element={<PlaceholderPage title="Portal Dashboard" />} />
-        <Route path="/portal/*" element={<PlaceholderPage title="Portal" />} />
+        <Route element={<RequireClient />}>
+          <Route path="/portal" element={<PortalLayout />}>
+            <Route index element={<PortalDashboardPage />} />
+            <Route path="projects" element={<PortalProjectsPage />} />
+            <Route path="invoices" element={<PortalInvoicesPage />} />
+          </Route>
+        </Route>
 
         <Route path="/admin" element={<PlaceholderPage title="Admin Dashboard" />} />
         <Route path="/admin/*" element={<PlaceholderPage title="Admin" />} />
