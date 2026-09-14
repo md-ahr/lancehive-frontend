@@ -322,24 +322,29 @@
 
 ---
 
-## Phase 3 — Members (P1)
+## Phase 3 — Members (P1) ✅
 
 ### M-01 — Types + query keys
-**Done when:** Member types; `memberKeys`; key unit test
+**Done when:**
+- [x] Member types; `memberKeys`; key unit test
 
 ### M-02 — useMemberList, useInviteMember | **API:** `GET/POST /members`
-**Done when:** Hook MSW tests; invite invalidates list
+**Done when:**
+- [x] Hook MSW tests; invite invalidates list
 
 ### M-03 — MembersPage
-**Done when:** DataTable; four states; cursor pagination; integration tests (all 4 states)
+**Done when:**
+- [x] DataTable; four states; cursor pagination; integration tests (all 4 states)
 
 ### M-04 — InviteMemberDialog
-**Done when:** email + role; 422 mapping; integration tests
+**Done when:**
+- [x] email + role; 422 mapping; integration tests
 
 ### M-05 — Route `/app/members`
-**Done when:** Wired; integration test load page
+**Done when:**
+- [x] Wired; integration test load page
 
-**Phase 3 exit:** List + invite; 403 for non-admin shows toast.
+**Phase 3 exit:** List + invite; 403 for non-admin shows toast. ✅
 
 ---
 

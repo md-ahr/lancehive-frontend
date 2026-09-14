@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
 
-import { RequireFreelancer } from '@/features/Auth/components/RequireFreelancer'
 import { AuthLayout } from '@/features/Auth/components/AuthLayout'
 import { PersonaRedirect } from '@/features/Auth/components/PersonaRedirect'
 import { RequireAuth } from '@/features/Auth/components/RequireAuth'
+import { RequireFreelancer } from '@/features/Auth/components/RequireFreelancer'
 import { ForgotPasswordPage } from '@/features/Auth/pages/ForgotPasswordPage'
 import { LoginPage } from '@/features/Auth/pages/LoginPage'
 import { ResetPasswordPage } from '@/features/Auth/pages/ResetPasswordPage'
@@ -11,6 +11,7 @@ import { AppLayout } from '@/features/Layout/components/AppLayout'
 import { DashboardPage } from '@/features/Layout/pages/DashboardPage'
 import { NotFoundPage } from '@/features/Layout/pages/NotFoundPage'
 import { PlaceholderPage } from '@/features/Layout/pages/PlaceholderPage'
+import { MembersPage } from '@/features/Members/pages/MembersPage'
 import { UserSettingsPage } from '@/features/Settings/pages/UserSettingsPage'
 import { WorkspaceSettingsPage } from '@/features/Settings/pages/WorkspaceSettingsPage'
 
@@ -35,7 +36,7 @@ export function AppRoutes() {
             <Route path="projects/:id" element={<PlaceholderPage title="Project detail" />} />
             <Route path="invoices" element={<PlaceholderPage title="Invoices" />} />
             <Route path="invoices/:id" element={<PlaceholderPage title="Invoice detail" />} />
-            <Route path="members" element={<PlaceholderPage title="Members" />} />
+            <Route path="members" element={<MembersPage />} />
             <Route path="settings" element={<UserSettingsPage />} />
             <Route path="workspace" element={<WorkspaceSettingsPage />} />
             <Route path="subscription" element={<PlaceholderPage title="Subscription" />} />

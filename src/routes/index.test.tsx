@@ -48,6 +48,17 @@ describe('AppRoutes', () => {
     })
   })
 
+  it('loads members page route', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/app/members' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Members' })).toBeInTheDocument()
+    })
+  })
+
   it('navigates to user settings from app shell', async () => {
     setToken('test-token')
     useAuthStore.setState({ hasToken: true, isHydrated: true })
