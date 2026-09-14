@@ -191,6 +191,75 @@ describe('AppRoutes', () => {
     })
   })
 
+  it('loads admin dashboard for super admin', async () => {
+    setToken('admin-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/admin' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Admin Dashboard' })).toBeInTheDocument()
+    })
+  })
+
+  it('redirects freelancer away from admin routes', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/admin' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Dashboard' })).toBeInTheDocument()
+    })
+  })
+
+  it('loads freelancers page route', async () => {
+    setToken('admin-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/admin/freelancers' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Freelancers' })).toBeInTheDocument()
+      expect(screen.getByText('Acme Studio')).toBeInTheDocument()
+    })
+  })
+
+  it('loads plans page route', async () => {
+    setToken('admin-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/admin/plans' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Plans' })).toBeInTheDocument()
+      expect(screen.getByText('Starter')).toBeInTheDocument()
+    })
+  })
+
+  it('navigates between admin routes', async () => {
+    setToken('admin-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/admin' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Admin Dashboard' })).toBeInTheDocument()
+    })
+
+    await userEvent.click(screen.getByRole('link', { name: 'Freelancers' }))
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Freelancers' })).toBeInTheDocument()
+    })
+
+    await userEvent.click(screen.getByRole('link', { name: 'Plans' }))
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Plans' })).toBeInTheDocument()
+    })
+  })
+
   it('renders 404 for unknown routes', () => {
     renderWithProviders(<AppRoutes />, { route: '/does-not-exist' })
     expect(screen.getByRole('heading', { name: 'Page not found' })).toBeInTheDocument()

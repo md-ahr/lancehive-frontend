@@ -1,10 +1,14 @@
 import { Route, Routes } from 'react-router-dom'
 
+import { AdminDashboardPage } from '@/features/Admin/pages/AdminDashboardPage'
+import { FreelancersPage } from '@/features/Admin/pages/FreelancersPage'
+import { PlansPage } from '@/features/Admin/pages/PlansPage'
 import { AuthLayout } from '@/features/Auth/components/AuthLayout'
 import { PersonaRedirect } from '@/features/Auth/components/PersonaRedirect'
 import { RequireAuth } from '@/features/Auth/components/RequireAuth'
 import { RequireClient } from '@/features/Auth/components/RequireClient'
 import { RequireFreelancer } from '@/features/Auth/components/RequireFreelancer'
+import { RequireSuperAdmin } from '@/features/Auth/components/RequireSuperAdmin'
 import { ForgotPasswordPage } from '@/features/Auth/pages/ForgotPasswordPage'
 import { LoginPage } from '@/features/Auth/pages/LoginPage'
 import { ResetPasswordPage } from '@/features/Auth/pages/ResetPasswordPage'
@@ -12,10 +16,10 @@ import { ClientDetailPage } from '@/features/Clients/pages/ClientDetailPage'
 import { ClientsPage } from '@/features/Clients/pages/ClientsPage'
 import { InvoiceDetailPage } from '@/features/Invoices/pages/InvoiceDetailPage'
 import { InvoicesPage } from '@/features/Invoices/pages/InvoicesPage'
+import { AdminLayout } from '@/features/Layout/components/AdminLayout'
 import { AppLayout } from '@/features/Layout/components/AppLayout'
 import { DashboardPage } from '@/features/Layout/pages/DashboardPage'
 import { NotFoundPage } from '@/features/Layout/pages/NotFoundPage'
-import { PlaceholderPage } from '@/features/Layout/pages/PlaceholderPage'
 import { MembersPage } from '@/features/Members/pages/MembersPage'
 import { PortalLayout } from '@/features/Portal/components/PortalLayout'
 import { PortalDashboardPage } from '@/features/Portal/pages/PortalDashboardPage'
@@ -63,8 +67,13 @@ export function AppRoutes() {
           </Route>
         </Route>
 
-        <Route path="/admin" element={<PlaceholderPage title="Admin Dashboard" />} />
-        <Route path="/admin/*" element={<PlaceholderPage title="Admin" />} />
+        <Route element={<RequireSuperAdmin />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboardPage />} />
+            <Route path="freelancers" element={<FreelancersPage />} />
+            <Route path="plans" element={<PlansPage />} />
+          </Route>
+        </Route>
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

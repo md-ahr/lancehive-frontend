@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw'
 
+import { adminHandlers } from './admin'
 import { authHandlers } from './auth'
 import { clientMembersHandlers } from './client-members'
 import { clientsHandlers } from './clients'
@@ -17,6 +18,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'
 export const handlers = [
   http.get(`${API_BASE_URL}/health`, () => HttpResponse.json({ status: 'ok' })),
   ...authHandlers,
+  ...adminHandlers,
   ...clientsHandlers,
   ...clientMembersHandlers,
   ...projectsHandlers,

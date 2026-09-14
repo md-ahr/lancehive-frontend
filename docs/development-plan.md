@@ -597,25 +597,33 @@
 
 ---
 
-## Phase 12 — Admin (P3)
+## Phase 12 — Admin (P3) ✅
 
 ### AD-01 — RequireSuperAdmin | **Done when:** Integration test redirect non-admin
+- [x] `RequireSuperAdmin` guard; redirects freelancer/client; integration tests
 
 ### AD-02 — AdminLayout | **Done when:** Component test render
+- [x] `AdminLayout` + `AdminSidebar`; component test render
 
 ### AD-03 — Freelancer admin hooks | **Done when:** CRUD + resend + subscription PATCH; hook tests
+- [x] `useFreelancerList`, `useCreateFreelancer`, `useUpdateFreelancer`, `useResendInvite`, `useOverrideSubscription`; hook tests
 
 ### AD-04 — FreelancersPage + CreateFreelancerDialog | **Done when:** Integration tests full flow
+- [x] `FreelancersPage`, `FreelancersTable`, `CreateFreelancerDialog`; integration tests full flow
 
 ### AD-05 — ResendInviteButton, subscription override | **Done when:** Component/integration tests
+- [x] `ResendInviteButton`, `SubscriptionOverrideDialog`; component/integration tests
 
 ### AD-06 — Plan admin hooks | **Done when:** CRUD hook tests
+- [x] `usePlanList`, `useCreatePlan`, `useUpdatePlan`; hook tests
 
 ### AD-07 — PlansPage + PlanFormDialog | **Done when:** Integration tests
+- [x] `PlansPage`, `PlansTable`, `PlanFormDialog`; integration tests
 
 ### AD-08 — Wire `/admin/*` | **Done when:** Routes + integration tests
+- [x] Routes wired under `RequireSuperAdmin` + `AdminLayout`; routes integration tests
 
-**Phase 12 exit:** Admin creates workspace + manages plans.
+**Phase 12 exit:** Admin creates workspace + manages plans. ✅
 
 ---
 
