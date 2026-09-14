@@ -1,4 +1,4 @@
-import type { PaginatedResponse } from '@/types/api'
+import type { ClientMembership, ClientMembershipRole, PaginatedResponse } from '@/types/api'
 
 export type ClientStatus = 'active' | 'archived'
 
@@ -22,4 +22,14 @@ export type UpdateClientRequest = {
   name?: string
   contact_email?: string | null
   status?: ClientStatus
+}
+
+export type ClientMemberResource = ClientMembership
+
+export type ClientMemberListResponse = PaginatedResponse<ClientMemberResource>
+
+export type InviteClientMemberRequest = {
+  name: string
+  email: string
+  role: ClientMembershipRole
 }

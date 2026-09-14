@@ -13,6 +13,7 @@ import { ApiError, getErrorCode } from '@/lib/errors'
 
 import { ClientFormDialog } from '../components/ClientFormDialog'
 import { ClientHeader } from '../components/ClientHeader'
+import { ClientMembersTab } from '../components/ClientMembersTab'
 import { DeleteClientDialog } from '../components/DeleteClientDialog'
 import { useClient } from '../hooks/useClient'
 
@@ -95,9 +96,7 @@ export function ClientDetailPage() {
           <ClientProjectsTab clientId={client.id} />
         </TabsContent>
         <TabsContent value="members">
-          <div className="border-border bg-card text-muted-foreground border p-6 text-sm">
-            Client portal members will appear here.
-          </div>
+          <ClientMembersTab clientId={client.id} />
         </TabsContent>
       </Tabs>
 

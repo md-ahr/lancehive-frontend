@@ -5,3 +5,10 @@ export const clientKeys = {
   details: () => [...clientKeys.all, 'detail'] as const,
   detail: (id: string) => [...clientKeys.details(), id] as const,
 }
+
+export const clientMemberKeys = {
+  all: ['client-members'] as const,
+  lists: () => [...clientMemberKeys.all, 'list'] as const,
+  list: (clientId: string, cursor?: string) =>
+    [...clientMemberKeys.lists(), clientId, { cursor }] as const,
+}

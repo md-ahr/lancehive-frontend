@@ -28,7 +28,7 @@
 ## Phase 0 — Foundation (P0) ✅
 
 ### F-01 — Install stack
-**Output:** `package.json`, `components.json`, Tailwind config  
+**Output:** `package.json`, `components.json`, Tailwind config
 **Depends:** — | **Tests:** N/A
 
 **Done when:**
@@ -39,7 +39,7 @@
 ---
 
 ### F-02 — Path alias `@/`
-**Output:** `vite.config.ts`, `tsconfig.app.json`  
+**Output:** `vite.config.ts`, `tsconfig.app.json`
 **Depends:** F-01 | **Tests:** N/A
 
 **Done when:**
@@ -49,7 +49,7 @@
 ---
 
 ### F-03 — App providers
-**Output:** `src/app/providers.tsx`  
+**Output:** `src/app/providers.tsx`
 **Depends:** F-01 | **Tests:** integration smoke optional
 
 **Done when:**
@@ -60,7 +60,7 @@
 ---
 
 ### F-04 — API client + error helpers
-**Output:** `lib/api.ts`, `lib/errors.ts`, `lib/api-types.ts`  
+**Output:** `lib/api.ts`, `lib/errors.ts`, `lib/api-types.ts`
 **Depends:** — | **Tests:** unit
 
 **Done when:**
@@ -71,7 +71,7 @@
 ---
 
 ### F-05 — Auth storage
-**Output:** `lib/auth-storage.ts`  
+**Output:** `lib/auth-storage.ts`
 **Depends:** F-04 | **Tests:** unit
 
 **Done when:**
@@ -81,7 +81,7 @@
 ---
 
 ### F-06 — Global API types
-**Output:** `src/types/api.ts`  
+**Output:** `src/types/api.ts`
 **Depends:** F-04 | **Tests:** unit (type tests optional)
 
 **Done when:**
@@ -91,7 +91,7 @@
 ---
 
 ### F-07 — Route skeleton
-**Output:** `src/routes/index.tsx`  
+**Output:** `src/routes/index.tsx`
 **Depends:** F-03 | **Tests:** integration
 
 **Done when:**
@@ -102,7 +102,7 @@
 ---
 
 ### F-08 — Core shadcn primitives
-**Output:** `src/components/ui/*`  
+**Output:** `src/components/ui/*`
 **Depends:** F-01 | **Tests:** N/A
 
 **Done when:**
@@ -112,7 +112,7 @@
 ---
 
 ### F-09 — PageHeader, EmptyState, ErrorAlert, LoadingSkeleton
-**Output:** `src/components/*.tsx`  
+**Output:** `src/components/*.tsx`
 **Depends:** F-08 | **Tests:** component
 
 **Done when:**
@@ -123,7 +123,7 @@
 ---
 
 ### F-10 — CursorPagination
-**Output:** `src/components/CursorPagination.tsx`  
+**Output:** `src/components/CursorPagination.tsx`
 **Depends:** F-06, F-08 | **Tests:** component
 
 **Done when:**
@@ -133,7 +133,7 @@
 ---
 
 ### F-11 — ReadOnlyBanner
-**Output:** `src/components/ReadOnlyBanner.tsx`  
+**Output:** `src/components/ReadOnlyBanner.tsx`
 **Depends:** F-08 | **Tests:** component
 
 **Done when:**
@@ -143,7 +143,7 @@
 ---
 
 ### F-12 — ConfirmDialog
-**Output:** `src/components/ConfirmDialog.tsx`  
+**Output:** `src/components/ConfirmDialog.tsx`
 **Depends:** F-08 | **Tests:** component
 
 **Done when:**
@@ -153,7 +153,7 @@
 ---
 
 ### F-13 — Vitest + MSW setup
-**Output:** `vite.config.ts` (test block), `src/test/*`  
+**Output:** `vite.config.ts` (test block), `src/test/*`
 **Depends:** F-02 | **Tests:** N/A (infra)
 
 **Done when:**
@@ -530,13 +530,16 @@
 
 ---
 
-## Phase 9 — Client Portal Members (P1)
+## Phase 9 — Client Portal Members (P1) ✅
 
-### CM-01 — Client member hooks | **Done when:** list + invite; MSW tests
+### CM-01 — Client member hooks | **API:** `GET/POST /clients/{client}/members`
+**Done when:**
+- [x] `useClientMemberList`, `useInviteClientMember`; MSW tests; invite invalidates list
 
-### CM-02 — ClientMembersTab | **Done when:** Invite form; integration tests
+### CM-02 — ClientMembersTab | **Done when:**
+- [x] `ClientMembersTable`, `InviteClientMemberDialog`; four states; integration tests
 
-**Phase 9 exit:** Invite client contact to portal.
+**Phase 9 exit:** Invite client contact to portal. ✅
 
 ---
 

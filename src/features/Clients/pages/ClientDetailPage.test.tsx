@@ -1,4 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { http, HttpResponse } from 'msw'
 import { Route, Routes } from 'react-router-dom'
 import { beforeEach, describe, expect, it } from 'vitest'
@@ -86,6 +87,24 @@ describe('ClientDetailPage', () => {
       expect(screen.getByRole('tab', { name: 'Members' })).toBeInTheDocument()
       expect(screen.getByText('Website Redesign')).toBeInTheDocument()
       expect(screen.getByText('Mobile App')).toBeInTheDocument()
+    })
+  })
+
+  it('renders portal members on members tab', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderPage()
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'BigCo Ltd' })).toBeInTheDocument()
+    })
+
+    await userEvent.click(screen.getByRole('tab', { name: 'Members' }))
+
+    await waitFor(() => {
+      expect(screen.getByText('Sam Primary')).toBeInTheDocument()
+      expect(screen.getByText('Taylor Member')).toBeInTheDocument()
     })
   })
 })

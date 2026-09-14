@@ -1,6 +1,7 @@
 import { http, HttpResponse } from 'msw'
 
 import { authHandlers } from './auth'
+import { clientMembersHandlers } from './client-members'
 import { clientsHandlers } from './clients'
 import { invoicesHandlers } from './invoices'
 import { membersHandlers } from './members'
@@ -15,6 +16,7 @@ export const handlers = [
   http.get(`${API_BASE_URL}/health`, () => HttpResponse.json({ status: 'ok' })),
   ...authHandlers,
   ...clientsHandlers,
+  ...clientMembersHandlers,
   ...projectsHandlers,
   ...tasksHandlers,
   ...timeLogsHandlers,
