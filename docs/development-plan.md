@@ -32,9 +32,9 @@
 **Depends:** — | **Tests:** N/A
 
 **Done when:**
-- [ ] Tailwind, shadcn, TanStack Query, Zustand, React Router, RHF, zod, sonner installed
-- [ ] `pnpm dev` starts without errors
-- [ ] `components.json` uses `@/` alias
+- [x] Tailwind, shadcn, TanStack Query, Zustand, React Router, RHF, zod, sonner installed
+- [x] `pnpm dev` starts without errors
+- [x] `components.json` uses `@/` alias
 
 ---
 
@@ -43,8 +43,8 @@
 **Depends:** F-01 | **Tests:** N/A
 
 **Done when:**
-- [ ] `@/` resolves to `src/` in Vite and TypeScript
-- [ ] Sample import from `@/lib/utils` compiles
+- [x] `@/` resolves to `src/` in Vite and TypeScript
+- [x] Sample import from `@/lib/utils` compiles
 
 ---
 
@@ -53,9 +53,9 @@
 **Depends:** F-01 | **Tests:** integration smoke optional
 
 **Done when:**
-- [ ] QueryClientProvider with global error defaults (401 handler stub)
-- [ ] BrowserRouter wraps app
-- [ ] Toaster (sonner) mounted
+- [x] QueryClientProvider with global error defaults (401 handler stub)
+- [x] BrowserRouter wraps app
+- [x] Toaster (sonner) mounted
 
 ---
 
@@ -64,9 +64,9 @@
 **Depends:** — | **Tests:** unit
 
 **Done when:**
-- [ ] `apiRequest()` throws `ApiError` with status + body
-- [ ] `getErrorCode`, `getUserMessage`, `isValidationError`, `mapValidationErrorsToForm` implemented
-- [ ] Unit tests for error helpers (all HTTP codes in cheat sheet)
+- [x] `apiRequest()` throws `ApiError` with status + body
+- [x] `getErrorCode`, `getUserMessage`, `isValidationError`, `mapValidationErrorsToForm` implemented
+- [x] Unit tests for error helpers (all HTTP codes in cheat sheet)
 
 ---
 
@@ -75,8 +75,8 @@
 **Depends:** F-04 | **Tests:** unit
 
 **Done when:**
-- [ ] `getToken`, `setToken`, `clearToken` — single module only
-- [ ] Unit tests: set/get/clear cycle
+- [x] `getToken`, `setToken`, `clearToken` — single module only
+- [x] Unit tests: set/get/clear cycle
 
 ---
 
@@ -85,8 +85,8 @@
 **Depends:** F-04 | **Tests:** unit (type tests optional)
 
 **Done when:**
-- [ ] `User`, `MeResponse`, `PaginatedResponse<T>`, `ApiErrorBody` defined
-- [ ] Match shapes in `user-journey-api.md`
+- [x] `User`, `MeResponse`, `PaginatedResponse<T>`, `ApiErrorBody` defined
+- [x] Match shapes in `user-journey-api.md`
 
 ---
 
@@ -95,9 +95,9 @@
 **Depends:** F-03 | **Tests:** integration
 
 **Done when:**
-- [ ] Route groups: public, `/app`, `/portal`, `/admin` with placeholder pages
-- [ ] Unknown route → 404 page
-- [ ] Integration test: each group renders placeholder
+- [x] Route groups: public, `/app`, `/portal`, `/admin` with placeholder pages
+- [x] Unknown route → 404 page
+- [x] Integration test: each group renders placeholder
 
 ---
 
@@ -106,8 +106,8 @@
 **Depends:** F-01 | **Tests:** N/A
 
 **Done when:**
-- [ ] button, input, label, form, card, skeleton, alert, badge installed via CLI
-- [ ] Files unmodified except Tailwind classes
+- [x] button, input, label, form, card, skeleton, alert, badge installed via CLI
+- [x] Files unmodified except Tailwind classes
 
 ---
 
@@ -116,9 +116,9 @@
 **Depends:** F-08 | **Tests:** component
 
 **Done when:**
-- [ ] Each component exported with typed props
-- [ ] Component tests: render happy path for each
-- [ ] ErrorAlert accepts `ApiError` and shows retry when `onRetry` passed
+- [x] Each component exported with typed props
+- [x] Component tests: render happy path for each
+- [x] ErrorAlert accepts `ApiError` and shows retry when `onRetry` passed
 
 ---
 
@@ -127,8 +127,8 @@
 **Depends:** F-06, F-08 | **Tests:** component
 
 **Done when:**
-- [ ] Prev/next disabled when `meta.prev_cursor` / `meta.next_cursor` null
-- [ ] Component test: button disabled/enabled states
+- [x] Prev/next disabled when `meta.prev_cursor` / `meta.next_cursor` null
+- [x] Component test: button disabled/enabled states
 
 ---
 
@@ -137,8 +137,8 @@
 **Depends:** F-08 | **Tests:** component
 
 **Done when:**
-- [ ] Shows subscription lapsed message + link to `/app/subscription`
-- [ ] Component test: renders message and link
+- [x] Shows subscription lapsed message + link to `/app/subscription`
+- [x] Component test: renders message and link
 
 ---
 
@@ -147,8 +147,8 @@
 **Depends:** F-08 | **Tests:** component
 
 **Done when:**
-- [ ] AlertDialog wrapper with title, description, confirm/cancel
-- [ ] Component test: confirm calls `onConfirm`
+- [x] AlertDialog wrapper with title, description, confirm/cancel
+- [x] Component test: confirm calls `onConfirm`
 
 ---
 
@@ -157,10 +157,10 @@
 **Depends:** F-02 | **Tests:** N/A (infra)
 
 **Done when:**
-- [ ] Vitest + RTL + jsdom + MSW installed; scripts `test`, `test:watch`, `test:coverage`
-- [ ] `src/test/setup.ts`, `test-utils.tsx` with `renderWithProviders`
-- [ ] `src/test/msw/server.ts` + sample handler
-- [ ] `pnpm test` runs (even if zero tests)
+- [x] Vitest + RTL + jsdom + MSW installed; scripts `test`, `test:watch`, `test:coverage`
+- [x] `src/test/setup.ts`, `test-utils.tsx` with `renderWithProviders`
+- [x] `src/test/msw/server.ts` + sample handler
+- [x] `pnpm test` runs (even if zero tests)
 
 **Phase 0 exit:** App boots; shared components tested; `pnpm test` works.
 

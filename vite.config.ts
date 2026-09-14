@@ -12,6 +12,12 @@ export default defineConfig({
   },
   plugins: [react({ compiler: true }), tailwindcss()],
   test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./src/test/setup.ts'],
     passWithNoTests: true,
+    env: {
+      VITE_API_URL: '/api/v1',
+    },
   },
 })
