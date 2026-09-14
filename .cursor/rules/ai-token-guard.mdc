@@ -36,6 +36,7 @@ Do not reread rules, skills, or docs already loaded this session unless the repo
 | API contract | `docs/api-endpoints.md` → one endpoint file + schema |
 | DoD / tests | One file from `docs/standards/` matching the task type |
 | Routes / pages | `docs/pages-and-routes.md` — relevant section |
+| UI style / layout | `docs/design-direction.md` |
 | Context protocol | `docs/context-request-protocol.md` — when blocked only |
 
 Files over 200 lines: locate heading first, read that section only.

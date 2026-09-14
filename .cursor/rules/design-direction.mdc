@@ -1,0 +1,20 @@
+---
+description: Visual design — Stripe-inspired B2B SaaS, tokens, layout, tables
+globs: src/**/*.tsx
+alwaysApply: false
+---
+
+# Design Direction
+
+Full doc: `docs/design-direction.md`
+
+**North star:** Stripe Dashboard (2024) + LanceHive violet tokens in `src/index.css`.
+
+- **60-30-10 color rule:** ~60% neutral canvas (`background`/`muted`), ~30% secondary surfaces (`card`/`sidebar`/`border`), ~10% accent (`primary`) — one primary CTA per view
+- Neutral canvas (`bg-muted/30`), violet `primary` for actions/links only
+- Sidebar app shell (~240px) for `/app/*` and `/admin/*`; portal uses top nav, more whitespace
+- Tables over card grids; borders not shadows on list pages
+- Inter body (`font-sans`), Montserrat page titles (`font-heading`), `tabular-nums` for money/hours
+- CRUD in `Dialog`/`Sheet`; delete via `AlertDialog`; status as small `Badge`
+- Light default + dark supported; no gradients, glassmorphism, or marketing heroes in app routes
+- Portal: same system, read-only, no mutation UI

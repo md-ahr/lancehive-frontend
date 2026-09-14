@@ -35,6 +35,7 @@ Full guide: [docs/agentic-workflow.md](./docs/agentic-workflow.md)
 | [standards/naming-and-folders.md](./docs/standards/naming-and-folders.md) | Files + symbols |
 | [standards/security.md](./docs/standards/security.md) | Auth, secrets |
 | [standards/commit-messages.md](./docs/standards/commit-messages.md) | Conventional Commits |
+| [design-direction.md](./docs/design-direction.md) | UI style, layout, tokens |
 
 ## Skills by task
 

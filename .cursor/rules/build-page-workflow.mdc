@@ -32,7 +32,8 @@ Follow in order. Standards: `docs/standards/`. Task AC: `docs/development-plan.m
 - shadcn + shared components; four UI states
 
 ## 6. Styles
-- Tailwind tokens; mobile-first 375px / 1280px
+- Follow `docs/design-direction.md` (Stripe-inspired B2B SaaS)
+- Tailwind tokens from `src/index.css`; mobile-first 375px / 1280px
 
 ## 7. Test
 - Colocated Vitest + RTL + MSW per `docs/standards/testing-strategy.md`

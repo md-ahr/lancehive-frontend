@@ -13,6 +13,7 @@
 | [testing.mdc](./testing.mdc) | tests | [testing-strategy.md](../../docs/standards/testing-strategy.md) |
 | [feature-architecture.mdc](./feature-architecture.mdc) | `src/**` | — |
 | [component-composition.mdc](./component-composition.mdc) | `src/**/*.tsx` | — |
+| [design-direction.mdc](./design-direction.mdc) | `src/**/*.tsx` | [design-direction.md](../../docs/design-direction.md) |
 | [data-layer.mdc](./data-layer.mdc) | hooks, stores | — |
 | [api-integration.mdc](./api-integration.mdc) | hooks, lib | — |
 | [routing-auth.mdc](./routing-auth.mdc) | routes, Auth | — |
