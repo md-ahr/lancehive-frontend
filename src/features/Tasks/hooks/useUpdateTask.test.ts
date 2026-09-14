@@ -1,0 +1,50 @@
+import { QueryClient } from '@tanstack/react-query'
+import { renderHook, waitFor } from '@testing-library/react'
+import { beforeEach, describe, expect, it } from 'vitest'
+
+import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
+import { useWorkspaceContext } from '@/features/Workspace/hooks/useWorkspaceContext'
+import { setToken } from '@/lib/auth-storage'
+import { createWrapper } from '@/test/test-utils'
+
+import { taskKeys } from '../query-keys'
+import { useUpdateTask } from './useUpdateTask'
+
+function useUpdateTaskProbe() {
+  const context = useWorkspaceContext()
+  const mutation = useUpdateTask()
+
+  return { context, mutation }
+}
+
+describe('useUpdateTask', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    useAuthStore.setState({ hasToken: false, isHydrated: true })
+  })
+
+  it('updates a task and invalidates list and detail', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } })
+    await queryClient.prefetchQuery({ queryKey: taskKeys.projectList('20') })
+    await queryClient.prefetchQuery({ queryKey: taskKeys.detail('30') })
+
+    const { result } = renderHook(() => useUpdateTaskProbe(), {
+      wrapper: createWrapper({ queryClient, withWorkspace: true }),
+    })
+
+    await waitFor(() => expect(result.current.context.freelancerId).toBe('42'))
+
+    await result.current.mutation.mutateAsync({
+      id: '30',
+      title: 'Updated Task',
+    })
+
+    await waitFor(() => {
+      expect(queryClient.getQueryState(taskKeys.projectList('20'))?.isInvalidated).toBe(true)
+      expect(queryClient.getQueryState(taskKeys.detail('30'))?.isInvalidated).toBe(true)
+    })
+  })
+})

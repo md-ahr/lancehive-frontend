@@ -6,6 +6,7 @@ import { ErrorAlert } from '@/components/ErrorAlert'
 import { LoadingSkeleton } from '@/components/LoadingSkeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useClientList } from '@/features/Clients/hooks/useClientList'
+import { ProjectTasksTab } from '@/features/Tasks/components/ProjectTasksTab'
 import { ApiError, getErrorCode } from '@/lib/errors'
 
 import { ProjectHeader } from '../components/ProjectHeader'
@@ -90,9 +91,7 @@ export function ProjectDetailPage() {
           <TabsTrigger value="invoices">Invoices</TabsTrigger>
         </TabsList>
         <TabsContent value="tasks">
-          <div className="border-border bg-card text-muted-foreground border p-6 text-sm">
-            Tasks for this project will appear here.
-          </div>
+          <ProjectTasksTab projectId={project.id} />
         </TabsContent>
         <TabsContent value="time">
           <div className="border-border bg-card text-muted-foreground border p-6 text-sm">

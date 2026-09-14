@@ -426,17 +426,27 @@
 
 ## Phase 6 — Tasks (P1)
 
-### T-01 — Types + query keys | **Done when:** Task types; `taskKeys`; key test
+### T-01 — Types + query keys
+**Done when:**
+- [x] Task types; `taskKeys`; key test
 
-### T-02 — Task CRUD hooks | **Done when:** Project-scoped; hook MSW tests
+### T-02 — Task CRUD hooks
+**Done when:**
+- [x] Project-scoped; hook MSW tests
 
-### T-03 — ProjectTasksTab | **Done when:** DataTable; four states; integration tests
+### T-03 — ProjectTasksTab
+**Done when:**
+- [x] DataTable; four states; integration tests
 
-### T-04 — TaskFormDialog | **Done when:** CRUD dialog tests (validation, 422, success)
+### T-04 — TaskFormDialog
+**Done when:**
+- [x] CRUD dialog tests (validation, 422, success)
 
-### T-05 — TaskDetailPage or Sheet | **Done when:** Shows task + time log section placeholder; integration tests
+### T-05 — TaskDetailPage or Sheet
+**Done when:**
+- [x] Shows task + time log section placeholder; integration tests
 
-**Phase 6 exit:** Tasks under project; CRUD tested.
+**Phase 6 exit:** Tasks under project; CRUD tested. ✅
 
 ---
 
