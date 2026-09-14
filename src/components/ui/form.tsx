@@ -89,18 +89,21 @@ function FormLabel({ className, ...props }: React.ComponentProps<typeof Label>) 
   )
 }
 
-function FormControl({ ...props }: React.ComponentProps<'div'>) {
+type FormControlChildProps = React.HTMLAttributes<HTMLElement> & {
+  'data-slot'?: string
+}
+
+function FormControl({ children }: { children: React.ReactElement<FormControlChildProps> }) {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
 
-  return (
-    <div
-      data-slot="form-control"
-      id={formItemId}
-      aria-describedby={!error ? formDescriptionId : `${formDescriptionId} ${formMessageId}`}
-      aria-invalid={!!error}
-      {...props}
-    />
-  )
+  const controlProps: FormControlChildProps = {
+    id: formItemId,
+    'aria-describedby': !error ? formDescriptionId : `${formDescriptionId} ${formMessageId}`,
+    'aria-invalid': !!error,
+    'data-slot': 'form-control',
+  }
+
+  return React.cloneElement(children, controlProps)
 }
 
 function FormDescription({ className, ...props }: React.ComponentProps<'p'>) {
