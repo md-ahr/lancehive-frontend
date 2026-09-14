@@ -1,0 +1,28 @@
+---
+description: Vitest unit and integration testing requirements
+globs: src/**/*.{test,spec}.{ts,tsx},src/test/**/*
+alwaysApply: false
+---
+
+# Testing
+
+Full doc: `docs/standards/testing-strategy.md`
+
+**Required** for every task unless "Tests: N/A".
+
+| Task type | Minimum tests |
+|-----------|---------------|
+| Hook | MSW: success, error, correct headers/invalidation |
+| Page | RTL: loading, empty, error, happy (+ pagination if list) |
+| Dialog | validation, 422 mapping, submit success |
+| query-keys | key shape equality/snapshot |
+| lib helper | unit tests for all branches |
+
+Use `renderWithProviders()` from `src/test/test-utils.tsx`.
+Mock HTTP with MSW — do not mock TanStack Query globally.
+
+```bash
+pnpm test -- {FeatureName}
+```
+
+Step 8 of agentic workflow — before Verify.

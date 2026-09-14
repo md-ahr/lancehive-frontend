@@ -1,0 +1,17 @@
+---
+description: Frontend security — auth, secrets, XSS, authorization UI
+alwaysApply: true
+---
+
+# Security
+
+Full doc: `docs/standards/security.md`
+
+- Tokens only in `lib/auth-storage.ts` + `apiRequest()` — never log or expose
+- All secrets in `.env` — never `VITE_*` for secrets (client-bundled)
+- Context headers from `/me` memberships only
+- zod validate before every API submit
+- No `dangerouslySetInnerHTML` without sanitization
+- UI hides unauthorized actions; handle 403 gracefully
+- Portal: read-only — no mutation UI
+- Run `pnpm audit` at release milestones

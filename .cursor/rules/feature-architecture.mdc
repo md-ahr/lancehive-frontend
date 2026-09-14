@@ -1,0 +1,38 @@
+---
+description: Feature-first folder structure and naming conventions
+globs: src/**/*
+alwaysApply: false
+---
+
+# Feature Architecture
+
+```
+src/
+  features/{FeatureName}/
+    pages/           → route-level page components
+    components/      → feature-specific presentational components
+    hooks/           → TanStack Query hooks, custom hooks
+    stores/          → Zustand stores (UI state only)
+    types.ts         → feature TypeScript types
+    query-keys.ts    → TanStack Query key factory
+  components/
+    ui/              → shadcn/ui primitives (do not edit logic)
+    {SharedName}.tsx → cross-feature shared components
+  lib/
+    api.ts           → fetch client with auth interceptor
+    utils.ts         → cn(), formatters, helpers
+  routes/            → thin route definitions
+```
+
+**Separation:** Route → Page → Hooks (data) → Presentational components.
+
+**Naming:**
+- Pages: `{Feature}Page.tsx`
+- Hooks: `use{Entity}{Action}.ts` (e.g. `useClientList.ts`)
+- Stores: `use{Feature}Store.ts`
+- Types: mirror API schema names (`Client`, `ClientListResponse`)
+
+**Rules:**
+- Features are self-contained — not spread across unrelated folders.
+- Shared components in `components/ui/` must not contain feature-specific API calls.
+- Auth token handling is centralized in `lib/api.ts` — never duplicated per feature.

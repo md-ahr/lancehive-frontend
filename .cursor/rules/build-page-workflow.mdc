@@ -1,0 +1,45 @@
+---
+description: 8-step agentic workflow for building new pages and features
+globs: src/features/**/*
+alwaysApply: false
+---
+
+# Build a Page — Agentic Workflow
+
+Follow in order. Standards: `docs/standards/`. Task AC: `docs/development-plan.md`.
+
+## 1. Discover
+- Read task **Done when** in development-plan
+- Read API contract in `docs/user-journey-api.md`
+- List shadcn + shared components; find similar page
+
+## 2. Scaffold
+- `src/features/{FeatureName}/` — pages, hooks, types, query-keys
+- Thin route only; types mirror API
+
+## 3. Data Layer
+- One hook per query/mutation; colocated `query-keys.ts`
+- `apiRequest()` with correct context headers
+
+## 4. Client State
+- Zustand for UI-only state — never server cache
+
+## 5. Compose
+- shadcn + shared components; four UI states
+
+## 6. Styles
+- Tailwind tokens; mobile-first 375px / 1280px
+
+## 7. Test
+- Colocated Vitest + RTL + MSW per `docs/standards/testing-strategy.md`
+- Skill: `write-feature-tests`
+
+## 8. Verify
+- Task **Done when** + universal DoD
+- `tsc --noEmit`, `pnpm lint`, `pnpm test -- {feature}`
+- Audit skill if UI changed
+
+## 9. Commit (user request only)
+- Skill: `write-commit-message`
+- Format: `docs/standards/commit-messages.md`
+- Footer: `Task: {plan-id}`

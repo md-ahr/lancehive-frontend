@@ -1,0 +1,34 @@
+---
+description: Shared component inventory and when to create vs reuse
+globs: src/components/**/*
+alwaysApply: false
+---
+
+# Shared Components
+
+Build in `src/components/` — not `components/ui/` (shadcn only).
+
+## Required shared components (build in Phase 0)
+
+| Component | Props pattern | Do not duplicate in features |
+|-----------|---------------|------------------------------|
+| `PageHeader` | title, description?, actions? | page title rows |
+| `EmptyState` | icon?, title, description, action? | empty list messages |
+| `ErrorAlert` | error: ApiError \| Error | error displays |
+| `LoadingSkeleton` | variant: page \| table \| card | loading states |
+| `CursorPagination` | meta, onNext, onPrev | pagination controls |
+| `ConfirmDialog` | title, description, onConfirm | delete/void confirms |
+| `ReadOnlyBanner` | — | subscription lapsed |
+| `DataTable` | columns, data, isLoading | table + skeleton |
+
+## When to add a new shared component
+
+Extract when the **same UI pattern appears in 2+ features**. Keep feature-specific variants in `features/{Name}/components/`.
+
+## shadcn install before custom markup
+
+```bash
+npx shadcn@latest add table dialog alert-dialog sheet tabs sidebar breadcrumb
+```
+
+Customize via Tailwind + `cn()` — never edit `components/ui/` source.

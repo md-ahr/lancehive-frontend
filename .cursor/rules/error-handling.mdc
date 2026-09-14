@@ -1,0 +1,20 @@
+---
+description: API and UI error handling patterns
+globs: src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Error Handling
+
+Full doc: `docs/standards/error-handling.md`
+
+- All API failures → `ApiError` via `apiRequest()`
+- User messages via `getUserMessage()` — never stack traces
+- 401 → clear token, redirect `/login`
+- 403 `workspace_read_only` → ReadOnlyBanner + disable writes
+- 422 → map to form fields, not toast
+- Mutations → `toast.error` on non-validation failures
+- Pages → `ErrorAlert` + retry for query failures
+- Route segments → ErrorBoundary fallback
+
+Every page integration test must cover at least one error state.

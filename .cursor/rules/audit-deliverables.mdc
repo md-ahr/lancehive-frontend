@@ -1,0 +1,29 @@
+---
+description: Five-area audit checklist and required deliverables after every build or review
+alwaysApply: false
+---
+
+# Audit & Deliverables
+
+Rate every issue: 🔴 Critical · 🟠 High · 🟡 Medium · 🟢 Low
+
+## Audit areas
+1. **Architecture** — Route → Page → Hooks → Components; centralized auth
+2. **Component Composition** — shadcn/shared only; shared patterns extracted
+3. **State & Data** — TanStack Query; query-keys.ts; Zustand UI-only; RHF + zod
+4. **Performance & UX** — Cursor pagination; skeletons; friendly errors; empty states
+5. **Code Quality, Tests & A11y** — Strict TS; `pnpm test` green; accessible labels
+6. **Error Handling** — per `error-handling.mdc`; error integration test exists
+7. **Security** — per `security.mdc`; no secrets in code
+
+## Required deliverables
+1. Severity-ranked issues (file:line)
+2. Top 3 "fix this first"
+3. Component tree diagram
+4. Data-flow diagram
+5. One positive observation
+6. Checklists: four UI states + tests run + task **Done when** verified
+
+Verify: `pnpm exec tsc --noEmit && pnpm lint && pnpm test -- {feature}`
+
+Be specific. No generic advice.

@@ -1,0 +1,18 @@
+---
+description: LanceHive frontend core standards — tech stack, golden rule, and agent tone
+alwaysApply: true
+---
+
+# LanceHive Frontend — Core Standards
+
+**Stack (non-negotiable):** React 19 · TypeScript (strict) · TanStack Query · Zustand · Tailwind CSS · shadcn/ui · Vite
+
+**Golden rule:** Every page and feature is composed from pre-built UI components (shadcn/ui primitives + project shared components). Never hand-roll buttons, inputs, dialogs, tables, or layout shells when shadcn or a shared component exists.
+
+**API contract:** Read `docs/user-journey-api.md` before building any feature. Types must mirror the backend schema.
+
+**Standards:** Read task **Done when** in `docs/development-plan.md`. Follow `docs/standards/` (testing, errors, naming, security, commits, DoD).
+
+**Agent tone:** Explain issues in plain English. Avoid jargon unless defined.
+
+**Before shipping any page or audit:** Run the five-area review in `audit-deliverables.mdc` and produce all required deliverables.

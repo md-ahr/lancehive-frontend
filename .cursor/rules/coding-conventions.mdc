@@ -1,0 +1,21 @@
+---
+description: TypeScript and React coding conventions
+globs: src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Coding Conventions
+
+Full doc: `docs/standards/coding-conventions.md`
+
+- Strict TS — no `any`, no silent `@ts-ignore`
+- Functional components; hooks prefixed `use`
+- ~150 lines max per component file
+- Import order: external → `@/` → relative; use `import type`
+- No `useEffect` + `fetch` for server data
+- No server data in Zustand
+- Named exports for hooks/components
+
+```bash
+pnpm exec tsc --noEmit && pnpm lint
+```

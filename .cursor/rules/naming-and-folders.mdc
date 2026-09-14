@@ -1,0 +1,25 @@
+---
+description: File, folder, and symbol naming conventions
+globs: src/**/*
+alwaysApply: false
+---
+
+# Naming & Folders
+
+Full doc: `docs/standards/naming-and-folders.md`
+
+```
+src/features/{FeatureName}/pages|components|hooks|stores|types.ts|query-keys.ts
+```
+
+| Kind | Pattern |
+|------|---------|
+| Page | `{Entity}Page.tsx` |
+| Hook | `use{Entity}{Action}.ts` |
+| Hook test | `use{Entity}{Action}.test.ts` |
+| Page test | `{Entity}Page.test.tsx` |
+| Query keys | `{entity}Keys` in `query-keys.ts` |
+| Zod | `{entity}FormSchema` |
+
+Feature folders: PascalCase singular (`Clients`, `TimeLogs`).
+Routes: kebab-case paths. Tests colocated with source.

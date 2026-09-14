@@ -1,0 +1,31 @@
+---
+description: TanStack Query, Zustand, and form state patterns
+globs: src/**/{hooks,stores}/**/*,src/**/query-keys.ts
+alwaysApply: false
+---
+
+# State & Data Layer
+
+**Server data → TanStack Query only.** No `useEffect` + `fetch`.
+
+```typescript
+// query-keys.ts — colocated key factory
+export const clientKeys = {
+  all: ['clients'] as const,
+  lists: () => [...clientKeys.all, 'list'] as const,
+  list: (filters: ClientFilters) => [...clientKeys.lists(), filters] as const,
+  detail: (id: string) => [...clientKeys.all, 'detail', id] as const,
+};
+```
+
+**Mutations:** Invalidate only affected queries — never `queryClient.clear()`.
+
+**Zustand:** UI-only state (filters, sidebar, wizard step, selected rows). Never cache API responses.
+
+**Forms:** `react-hook-form` + `zod` — not uncontrolled inputs with manual state.
+
+**Optimistic updates:** Only where rollback is safe and tested.
+
+**Types:** Import or generate from backend contract — do not re-type inconsistently by hand.
+
+**Query config:** Set `staleTime` / `gcTime` appropriately — avoid refetching on every focus.

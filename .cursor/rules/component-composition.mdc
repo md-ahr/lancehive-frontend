@@ -1,0 +1,30 @@
+---
+description: shadcn/ui composition rules and pre-built component map
+globs: src/**/*.tsx
+alwaysApply: false
+---
+
+# Component Composition (shadcn/ui)
+
+Every interactive element must be a shadcn or shared component — no raw `<button>`, `<input>`, `<select>`.
+
+| Need              | Use                                              |
+|-------------------|--------------------------------------------------|
+| Page shell        | Card, Separator, PageHeader (shared)             |
+| Data list         | DataTable + Table + Pagination                   |
+| Create / Edit     | Dialog or Sheet + Form + field components        |
+| Delete confirm    | AlertDialog                                      |
+| Filters           | Select, Combobox, Popover, DatePicker            |
+| Status            | Badge, Alert                                     |
+| Loading           | Skeleton                                         |
+| Empty             | EmptyState (shared) or Card with muted text      |
+| Notifications     | sonner toast                                     |
+| Navigation        | Sidebar, Tabs, Breadcrumb                          |
+| User menu         | DropdownMenu + Avatar                            |
+| Settings sections | Tabs + Form + Switch / Checkbox                  |
+
+**Rules:**
+- Add shadcn components via CLI: `npx shadcn@latest add {name}` — leave `components/ui/` unmodified.
+- Custom styling via Tailwind classes and `cn()` — never edit shadcn source files.
+- Extract repeated patterns into shared components (`ConfirmDialog`, `PageHeader`, `DataTable`).
+- Pages are assembled from Cards, Tables, Dialogs, and Forms — not one giant JSX block.

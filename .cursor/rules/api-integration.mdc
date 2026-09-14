@@ -1,0 +1,51 @@
+---
+description: API integration patterns — headers, pagination, errors, types
+globs: src/**/{hooks,lib}/**/*,src/**/types.ts
+alwaysApply: false
+---
+
+# API Integration
+
+**Source of truth:** `docs/user-journey-api.md`
+
+## Request headers
+
+| Route group | Headers |
+|-------------|---------|
+| Public auth | none |
+| Tenant (`/clients`, `/projects`, …) | `Authorization` + `X-Freelancer-Id` |
+| Portal (`/portal/*`) | `Authorization` + `X-Client-Id` |
+| Admin (`/admin/*`) | `Authorization` only |
+| Subscription | `Authorization` + `X-Freelancer-Id` |
+
+Use `apiRequest()` from `lib/api.ts` — never raw `fetch` in features.
+
+## Cursor pagination
+
+All list endpoints return:
+
+```typescript
+type PaginatedResponse<T> = {
+  data: T[]
+  links: { first: string; prev: string | null; next: string | null }
+  meta: { per_page: number; next_cursor: string | null; prev_cursor: string | null }
+}
+```
+
+Pass `cursor` and `per_page` (default 25, max 100) as query params. Use shared `CursorPagination` component.
+
+## Error handling
+
+| HTTP | code | UI action |
+|------|------|-----------|
+| 401 | `unauthenticated` | clear token, redirect `/login` |
+| 403 | `workspace_read_only` | show ReadOnlyBanner, disable write buttons |
+| 403 | `forbidden` | toast + hide action |
+| 422 | `validation_failed` | map `errors` to form fields |
+| 422 | `plan_limit_exceeded` | upgrade prompt |
+
+Parse `ApiError.body` — never show raw stack traces.
+
+## Types
+
+Mirror API resource names in feature `types.ts`. Shared pagination/auth types live in `src/types/api.ts`.

@@ -1,0 +1,50 @@
+---
+description: Conventional Commits format when creating git commits
+alwaysApply: false
+---
+
+# Commit Messages
+
+Full standard: `docs/standards/commit-messages.md`
+
+**Only commit when the user explicitly asks.**
+
+## Format
+
+```
+<type>(<scope>): <imperative summary ≤72 chars>
+
+[body — why, not what]
+
+Task: {plan-id}
+```
+
+## Types
+
+`feat` · `fix` · `docs` · `style` · `refactor` · `test` · `chore` · `perf` · `build` · `ci`
+
+## Scopes
+
+`auth` · `clients` · `projects` · `invoices` · `portal` · `admin` · `layout` · `deps` · `test`
+
+## Rules
+
+- Imperative summary: "add hook" not "added hook"
+- Match message to `git diff` — read diff before writing
+- One task ID per commit when working from development-plan
+- Never commit `.env` or secrets
+- Use HEREDOC for `git commit -m`
+
+## Examples
+
+```
+feat(auth): add LoginPage with form validation
+
+Task: A-05
+```
+
+```
+test(clients): add useClientList MSW hook tests
+
+Task: C-02
+```

@@ -1,0 +1,49 @@
+---
+description: Routing, auth guards, and persona-based access control
+globs: src/**/{routes,features/Auth}/**/*
+alwaysApply: false
+---
+
+# Routing & Auth
+
+## Route guards (compose, don't duplicate logic)
+
+| Guard | Checks | Redirect |
+|-------|--------|----------|
+| `RequireAuth` | valid token + `useMe` success | `/login` |
+| `RequireFreelancer` | role owner/member + workspace context | `/login` |
+| `RequireClient` | role client + client context | `/login` |
+| `RequireSuperAdmin` | `role: super_admin` | `/app` |
+
+## Post-login routing (`PersonaRedirect`)
+
+```
+super_admin  → /admin
+client       → /portal
+freelancer   → /app
+```
+
+## Layout nesting
+
+```
+AuthLayout     → public auth pages (no sidebar)
+AppLayout      → /app/* (WorkspaceSwitcher, ReadOnlyBanner)
+PortalLayout   → /portal/* (ClientSwitcher, read-only)
+AdminLayout    → /admin/* (no workspace header)
+```
+
+## Read-only mode
+
+When `subscription.read_only === true`:
+- Disable all tenant **write** mutations in UI
+- API returns 403 `workspace_read_only` — show toast if user tries
+- Subscription routes remain writable (owner checkout/cancel)
+
+## Route files stay thin
+
+```tsx
+// ✅ routes only import pages
+{ path: 'clients', element: <ClientsPage /> }
+
+// ❌ no data fetching or business logic in routes
+```
