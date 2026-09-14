@@ -1,8 +1,8 @@
 # API User Journey
 
-Step-by-step guide for integrating with the LanceHive API (`/api/v1`). Use this document to understand **who calls what, in what order**, before diving into per-route specs in [endpoints/](./endpoints/).
+Step-by-step guide for integrating with the LanceHive API (`/api/v1`). Use this document to understand **who calls what, in what order**, before diving into per-route specs in [endpoints/](./api/endpoints/).
 
-**Related docs:** [conventions.md](./conventions.md) · [errors.md](./errors.md) · [README.md](./README.md) · Live OpenAPI at `/docs/api`
+**Related docs:** [api-endpoints.md](./api-endpoints.md) · [conventions.md](./api/conventions.md) · [errors.md](./api/errors.md) · [api/README.md](./api/README.md) · Live OpenAPI at `/docs/api`
 
 ---
 
@@ -146,7 +146,7 @@ sequenceDiagram
     API-->>App: 200 { token, user }
 ```
 
-See [endpoints/auth.md](./endpoints/auth.md) for field rules and error codes.
+See [endpoints/auth.md](./api/endpoints/auth.md) for field rules and error codes.
 
 ---
 
@@ -194,7 +194,7 @@ Content-Type: application/json
 
 No `X-Freelancer-Id` header — admin routes are platform-scoped.
 
-See [endpoints/admin-freelancers.md](./endpoints/admin-freelancers.md) and [endpoints/admin-plans.md](./endpoints/admin-plans.md).
+See [endpoints/admin-freelancers.md](./api/endpoints/admin-freelancers.md) and [endpoints/admin-plans.md](./api/endpoints/admin-plans.md).
 
 ---
 
@@ -294,7 +294,7 @@ Content-Type: application/json
 | 5 | `POST /client-invoices/{id}/payments` | Record payment |
 | 6 | `DELETE /client-invoices/{id}` | Void draft only |
 
-Draft invoices can be edited; sent invoices follow status rules in [endpoints/client-invoices.md](./endpoints/client-invoices.md).
+Draft invoices can be edited; sent invoices follow status rules in [endpoints/client-invoices.md](./api/endpoints/client-invoices.md).
 
 ### Phase D — Invite client contacts
 
@@ -337,7 +337,7 @@ sequenceDiagram
 
 Send `X-Client-Id` when the user belongs to multiple client organizations.
 
-See [endpoints/portal.md](./endpoints/portal.md).
+See [endpoints/portal.md](./api/endpoints/portal.md).
 
 ---
 
@@ -367,7 +367,7 @@ stateDiagram-v2
 
 **Read-only mode:** When `subscription.read_only` is `true`, tenant **write** routes return `403 workspace_read_only`. Reads still work. Subscription mutations and admin routes are exempt.
 
-See [endpoints/subscription.md](./endpoints/subscription.md) and [endpoints/webhooks.md](./endpoints/webhooks.md).
+See [endpoints/subscription.md](./api/endpoints/subscription.md) and [endpoints/webhooks.md](./api/endpoints/webhooks.md).
 
 ---
 
@@ -403,7 +403,7 @@ GET /api/v1/clients?per_page=25&cursor=eyJpZCI6MjV9
 | Max `per_page` | 100 |
 | Invalid `per_page` | `422 validation_failed` |
 
-See [schemas/pagination.md](./schemas/pagination.md).
+See [schemas/pagination.md](./api/schemas/pagination.md).
 
 ---
 
@@ -424,7 +424,7 @@ All errors return JSON. Business errors include a machine-readable `code`.
 
 Validation errors (`422`) use Laravel's `errors` object (field → messages) without a top-level `code`.
 
-Full catalog: [errors.md](./errors.md).
+Full catalog: [errors.md](./api/errors.md).
 
 ---
 
@@ -481,13 +481,13 @@ For subscription setup (owner), insert between steps 2 and 3:
 |------|-----|---------|
 | Stoplight UI | `/docs/api` | Browse & try endpoints |
 | OpenAPI JSON | `/docs/api.json` | Code generation, CI contract tests |
-| Per-route specs | [endpoints/](./endpoints/) | Request/response field detail |
-| JSON schemas | [schemas/](./schemas/) | Resource field reference |
+| Per-route specs | [endpoints/](./api/endpoints/) | Request/response field detail |
+| JSON schemas | [schemas/](./api/schemas/) | Resource field reference |
 
 ---
 
 ## Next steps
 
-1. Read [conventions.md](./conventions.md) for global rules (data types, soft deletes, cross-tenant 404s).
+1. Read [conventions.md](./api/conventions.md) for global rules (data types, soft deletes, cross-tenant 404s).
 2. Pick your persona journey above and follow the linked endpoint files.
 3. Use `/docs/api` to inspect live schemas generated from code.

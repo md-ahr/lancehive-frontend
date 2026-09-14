@@ -1,60 +1,54 @@
 # LanceHive Frontend
 
-React 19 + TypeScript + Vite frontend for the LanceHive freelancer workspace platform.
+React 19 + TypeScript + Vite SPA for the LanceHive freelancer workspace platform.
 
-## Agentic Workflow (Cursor)
+## Agentic workflow (Cursor)
 
-- **[Cursor Agent Guide](./AGENTS.md)** — skills, rules, task workflow
-- **[Development Plan](./docs/development-plan.md)** — tasks with **Done when** acceptance criteria
-- **[Standards](./docs/standards/)** — DoD, testing, errors, naming, security, conventions, **commits**
-- **[Pages & Routes](./docs/pages-and-routes.md)** — route map and component inventory
-- **[Agentic Workflow](./docs/agentic-workflow.md)** — 7-step build process + audit
-- **[API User Journey](./docs/user-journey-api.md)** — API integration guide
-- **Cursor Rules** — `.cursor/rules/` (auto-loaded)
-- **Cursor Skills** — `.cursor/skills/` (invoke per task type)
+Start here when using Cursor agents:
+
+| Doc | Purpose |
+|-----|---------|
+| [AGENTS.md](./AGENTS.md) | Skills, rules, verify commands |
+| [Development plan](./docs/development-plan.md) | Tasks with **Done when** checklists |
+| [Agentic workflow](./docs/agentic-workflow.md) | 9-step build process + audit |
+| [API endpoints guide](./docs/api-endpoints.md) | How agents use the API contract |
+| [API user journey](./docs/user-journey-api.md) | Persona flows and call order |
+| [API contract](./docs/api/) | Per-route specs + JSON schemas |
+| [Pages & routes](./docs/pages-and-routes.md) | Route map and component inventory |
+| [Standards](./docs/standards/) | DoD, testing, errors, security, conventions |
+
+**Cursor rules:** `.cursor/rules/` (auto-loaded) · **Skills:** `.cursor/skills/` (invoke per task)
 
 ## Development
 
 ```bash
 pnpm install
-cp .env.example .env
+cp .env.example .env   # set VITE_API_URL to your backend
 pnpm dev
 ```
 
----
+### Verify before marking a task done
 
-## React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+pnpm exec tsc --noEmit
+pnpm lint
+pnpm test -- {FeatureName}
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Scripts
+
+| Command | Purpose |
+|---------|---------|
+| `pnpm dev` | Vite dev server |
+| `pnpm build` | Production build |
+| `pnpm check` | Typecheck + lint + format check |
+| `pnpm test` | Vitest (all tests) |
+| `pnpm test:watch` | Vitest watch mode |
+
+## Stack
+
+React 19 · TypeScript · TanStack Query · Zustand · React Router · Tailwind CSS · shadcn/ui · Vitest · MSW
+
+## Backend
+
+API runs separately (Laravel Sail). Default local base URL is typically `http://localhost/api/v1` — confirm against your backend `.env` `APP_URL`.

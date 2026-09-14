@@ -6,7 +6,7 @@ Follow on every task. Rules auto-load from `.cursor/rules/`; invoke skills from 
 
 1. Pick task ID from [docs/development-plan.md](./docs/development-plan.md)
 2. Read task **Done when** + [standards/definition-of-done.md](./docs/standards/definition-of-done.md)
-3. Read API in [docs/user-journey-api.md](./docs/user-journey-api.md)
+3. Read API in [docs/user-journey-api.md](./docs/user-journey-api.md) + [docs/api-endpoints.md](./docs/api-endpoints.md)
 4. Implement using skill below
 5. Write tests (`write-feature-tests`)
 6. Verify all Done when + `pnpm test`
