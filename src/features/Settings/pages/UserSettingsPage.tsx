@@ -1,5 +1,6 @@
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
+
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
@@ -43,10 +44,12 @@ export function UserSettingsPage() {
 
   useEffect(() => {
     if (settings.data) {
-      form.reset({
-        timezone: settings.data.timezone,
-        locale: settings.data.locale,
-      })
+      form.reset(
+        userSettingsFormSchema.parse({
+          timezone: settings.data.timezone,
+          locale: settings.data.locale,
+        }),
+      )
     }
   }, [settings.data, form])
 
@@ -83,7 +86,7 @@ export function UserSettingsPage() {
     <div className="space-y-6">
       <PageHeader title="User settings" description="Manage your timezone and locale." />
 
-      <div className="border-border max-w-lg rounded-lg border bg-card p-6">
+      <div className="border-border bg-card max-w-lg rounded-lg border p-6">
         <Form {...form}>
           <form className="space-y-5" onSubmit={handleSubmit} noValidate>
             {apiError ? <ErrorAlert error={apiError} /> : null}

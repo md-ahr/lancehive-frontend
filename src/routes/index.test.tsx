@@ -48,6 +48,28 @@ describe('AppRoutes', () => {
     })
   })
 
+  it('loads clients page route', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/app/clients' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Clients' })).toBeInTheDocument()
+    })
+  })
+
+  it('loads client detail route', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/app/clients/10' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'BigCo Ltd' })).toBeInTheDocument()
+    })
+  })
+
   it('loads members page route', async () => {
     setToken('test-token')
     useAuthStore.setState({ hasToken: true, isHydrated: true })

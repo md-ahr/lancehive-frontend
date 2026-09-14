@@ -348,32 +348,41 @@
 
 ---
 
-## Phase 4 — Clients (P1)
+## Phase 4 — Clients (P1) ✅
 
-### C-01 — Types + query keys | **Done when:** Client, ClientList types; `clientKeys`; key test
+### C-01 — Types + query keys
+**Done when:**
+- [x] Client, ClientList types; `clientKeys`; key test
 
 ### C-02 — useClientList | **API:** `GET /clients`
-**Done when:** Cursor param; header; hook MSW tests
+**Done when:**
+- [x] Cursor param; header; hook MSW tests
 
 ### C-03 — Client CRUD hooks
-**Done when:** get/create/update/delete; invalidation; hook tests each mutation
+**Done when:**
+- [x] get/create/update/delete; invalidation; hook tests each mutation
 
 ### C-04 — ClientsPage
-**Done when:** List + pagination + four states; integration tests (5 cases incl. pagination)
+**Done when:**
+- [x] List + pagination + four states; integration tests (5 cases incl. pagination)
 
 ### C-05 — ClientFormDialog
-**Done when:** create/edit; 422; read_only disabled; integration tests
+**Done when:**
+- [x] create/edit; 422; read_only disabled; integration tests
 
 ### C-06 — ClientDetailPage
-**Done when:** Header + tabs shell; loading/error/not-found; integration tests
+**Done when:**
+- [x] Header + tabs shell; loading/error/not-found; integration tests
 
 ### C-07 — DeleteClientDialog
-**Done when:** ConfirmDialog; delete mutation; integration test
+**Done when:**
+- [x] ConfirmDialog; delete mutation; integration test
 
 ### C-08 — Routes `/app/clients`, `/app/clients/:id`
-**Done when:** Wired; integration test navigation
+**Done when:**
+- [x] Wired; integration test navigation
 
-**Phase 4 exit:** Full CRUD; cursor pagination; all tests green.
+**Phase 4 exit:** Full CRUD; cursor pagination; all tests green. ✅
 
 ---
 

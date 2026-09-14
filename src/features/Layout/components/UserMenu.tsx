@@ -9,9 +9,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-
-import { useMe } from '@/features/Auth/hooks/useMe'
 import { useLogout } from '@/features/Auth/hooks/useLogout'
+import { useMe } from '@/features/Auth/hooks/useMe'
 
 export function UserMenu() {
   const me = useMe()

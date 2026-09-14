@@ -2,13 +2,13 @@ import { screen, waitFor } from '@testing-library/react'
 import { http, HttpResponse } from 'msw'
 import { beforeEach, describe, expect, it } from 'vitest'
 
+import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
+import { WorkspaceProvider } from '@/features/Workspace/components/WorkspaceProvider'
 import { setToken } from '@/lib/auth-storage'
 import { makeMemberRoleMeResponse } from '@/test/fixtures/auth'
 import { server } from '@/test/msw/server'
 import { renderWithProviders } from '@/test/test-utils'
 
-import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
-import { WorkspaceProvider } from '@/features/Workspace/components/WorkspaceProvider'
 import { WorkspaceSettingsPage } from './WorkspaceSettingsPage'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'

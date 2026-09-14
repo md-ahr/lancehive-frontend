@@ -2,12 +2,12 @@ import { renderHook, waitFor } from '@testing-library/react'
 import { http, HttpResponse } from 'msw'
 import { beforeEach, describe, expect, it } from 'vitest'
 
+import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { setToken } from '@/lib/auth-storage'
-import { server } from '@/test/msw/server'
 import { defaultWorkspaceSettings } from '@/test/fixtures/settings'
+import { server } from '@/test/msw/server'
 import { createWrapper } from '@/test/test-utils'
 
-import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { useWorkspaceSettings } from './useWorkspaceSettings'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'

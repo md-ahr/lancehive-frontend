@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { LoadingSkeleton } from '@/components/LoadingSkeleton'
 import { PageHeader } from '@/components/PageHeader'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useMe } from '@/features/Auth/hooks/useMe'
 
 const placeholderCards = [
@@ -20,10 +20,7 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Dashboard"
-        description={`Overview for ${workspaceName}`}
-      />
+      <PageHeader title="Dashboard" description={`Overview for ${workspaceName}`} />
       <div className="grid gap-4 md:grid-cols-3">
         {placeholderCards.map((card) => (
           <Card key={card.title}>

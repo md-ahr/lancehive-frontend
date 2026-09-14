@@ -1,5 +1,6 @@
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useMemo } from 'react'
+
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
@@ -17,8 +18,8 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { useWorkspaceContext } from '@/features/Workspace/hooks/useWorkspaceContext'
 import { useCanWrite } from '@/features/Workspace/hooks/useCanWrite'
+import { useWorkspaceContext } from '@/features/Workspace/hooks/useWorkspaceContext'
 import { ApiError, getErrorCode, isValidationError, mapValidationErrorsToForm } from '@/lib/errors'
 
 import { useUpdateWorkspaceSettings } from '../hooks/useUpdateWorkspaceSettings'
@@ -97,11 +98,16 @@ export function WorkspaceSettingsPage() {
 
     return (
       <div className="space-y-4">
-        <PageHeader title="Workspace settings" description="Configure defaults for your workspace." />
+        <PageHeader
+          title="Workspace settings"
+          description="Configure defaults for your workspace."
+        />
         {forbidden ? (
           <Alert>
             <AlertTitle>Access denied</AlertTitle>
-            <AlertDescription>You do not have permission to view workspace settings.</AlertDescription>
+            <AlertDescription>
+              You do not have permission to view workspace settings.
+            </AlertDescription>
           </Alert>
         ) : (
           <ErrorAlert error={settings.error} />
@@ -113,7 +119,10 @@ export function WorkspaceSettingsPage() {
   if (!canManage) {
     return (
       <div className="space-y-4">
-        <PageHeader title="Workspace settings" description="Configure defaults for your workspace." />
+        <PageHeader
+          title="Workspace settings"
+          description="Configure defaults for your workspace."
+        />
         <Alert>
           <AlertTitle>View only</AlertTitle>
           <AlertDescription>
@@ -137,7 +146,7 @@ export function WorkspaceSettingsPage() {
     <div className="space-y-6">
       <PageHeader title="Workspace settings" description="Invoice defaults and business details." />
 
-      <div className="border-border max-w-lg rounded-lg border bg-card p-6">
+      <div className="border-border bg-card max-w-lg rounded-lg border p-6">
         <Form {...form}>
           <form className="space-y-5" onSubmit={handleSubmit} noValidate>
             {apiError ? <ErrorAlert error={apiError} /> : null}
@@ -177,11 +186,7 @@ export function WorkspaceSettingsPage() {
                 <FormItem>
                   <FormLabel>Business name</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      value={field.value ?? ''}
-                      disabled={formDisabled}
-                    />
+                    <Input {...field} value={field.value ?? ''} disabled={formDisabled} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

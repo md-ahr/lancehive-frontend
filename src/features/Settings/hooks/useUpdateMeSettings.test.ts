@@ -1,12 +1,12 @@
-import { renderHook, waitFor } from '@testing-library/react'
 import { QueryClient } from '@tanstack/react-query'
+import { renderHook, waitFor } from '@testing-library/react'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { authKeys } from '@/features/Auth/query-keys'
+import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { setToken } from '@/lib/auth-storage'
 import { createWrapper } from '@/test/test-utils'
 
-import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { settingsKeys } from '../query-keys'
 import { useUpdateMeSettings } from './useUpdateMeSettings'
 

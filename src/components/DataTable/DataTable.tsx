@@ -22,6 +22,7 @@ type DataTableProps<T> = {
   isLoading?: boolean
   emptyMessage?: string
   getRowId?: (row: T) => string | number
+  onRowClick?: (row: T) => void
 }
 
 export function DataTable<T>({
@@ -30,6 +31,7 @@ export function DataTable<T>({
   isLoading = false,
   emptyMessage = 'No results.',
   getRowId,
+  onRowClick,
 }: DataTableProps<T>) {
   if (isLoading) {
     return <LoadingSkeleton variant="table" />
@@ -57,7 +59,11 @@ export function DataTable<T>({
           {data.map((row, index) => {
             const rowKey = getRowId?.(row) ?? index
             return (
-              <TableRow key={rowKey}>
+              <TableRow
+                key={rowKey}
+                className={onRowClick ? 'cursor-pointer' : undefined}
+                onClick={onRowClick ? () => onRowClick(row) : undefined}
+              >
                 {columns.map((column) => (
                   <TableCell key={column.id}>{column.cell(row)}</TableCell>
                 ))}

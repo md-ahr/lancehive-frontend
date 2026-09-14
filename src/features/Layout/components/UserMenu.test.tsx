@@ -2,10 +2,10 @@ import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it } from 'vitest'
 
+import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { setToken } from '@/lib/auth-storage'
 import { renderWithProviders } from '@/test/test-utils'
 
-import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { UserMenu } from './UserMenu'
 
 describe('UserMenu', () => {

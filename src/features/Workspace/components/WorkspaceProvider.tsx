@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 
+import type { FreelancerMembership } from '@/types/api'
+
 import { useMe } from '@/features/Auth/hooks/useMe'
 import { getFreelancerId, setFreelancerId as persistFreelancerId } from '@/lib/workspace-storage'
-import type { FreelancerMembership } from '@/types/api'
 
 import { WorkspaceContext } from '../hooks/useWorkspaceContext'
 
@@ -43,11 +44,7 @@ export function WorkspaceProvider({ children }: WorkspaceProviderProps) {
       return null
     }
 
-    return resolveFreelancerId(
-      memberships,
-      activeFreelancer?.id ?? null,
-      getFreelancerId(),
-    )
+    return resolveFreelancerId(memberships, activeFreelancer?.id ?? null, getFreelancerId())
   }, [me.data, memberships, activeFreelancer?.id])
 
   const freelancerId = selectedId ?? defaultId

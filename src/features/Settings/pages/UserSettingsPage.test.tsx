@@ -3,11 +3,11 @@ import userEvent from '@testing-library/user-event'
 import { http, HttpResponse } from 'msw'
 import { beforeEach, describe, expect, it } from 'vitest'
 
+import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { setToken } from '@/lib/auth-storage'
 import { server } from '@/test/msw/server'
 import { renderWithProviders } from '@/test/test-utils'
 
-import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { UserSettingsPage } from './UserSettingsPage'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'

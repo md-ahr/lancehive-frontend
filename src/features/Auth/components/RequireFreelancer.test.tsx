@@ -1,14 +1,14 @@
 import { screen, waitFor } from '@testing-library/react'
 import { http, HttpResponse } from 'msw'
-import { beforeEach, describe, expect, it } from 'vitest'
 import { Route, Routes } from 'react-router-dom'
+import { beforeEach, describe, expect, it } from 'vitest'
 
+import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { setToken } from '@/lib/auth-storage'
 import { makeMeResponse } from '@/test/fixtures/auth'
 import { server } from '@/test/msw/server'
 import { renderWithProviders } from '@/test/test-utils'
 
-import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { RequireFreelancer } from './RequireFreelancer'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'

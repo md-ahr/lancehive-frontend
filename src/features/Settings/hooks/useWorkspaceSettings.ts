@@ -12,8 +12,7 @@ export function useWorkspaceSettings() {
 
   return useQuery({
     queryKey: settingsKeys.workspace(),
-    queryFn: () =>
-      apiRequest<WorkspaceSettingsResource>('/workspace/settings', { freelancerId }),
+    queryFn: () => apiRequest<WorkspaceSettingsResource>('/workspace/settings', { freelancerId }),
     enabled: Boolean(freelancerId),
   })
 }

@@ -41,7 +41,10 @@ describe('useMe', () => {
 
     server.use(
       http.get(`${API_BASE_URL}/me`, () =>
-        HttpResponse.json({ code: 'unauthenticated', message: 'Unauthenticated.' }, { status: 401 }),
+        HttpResponse.json(
+          { code: 'unauthenticated', message: 'Unauthenticated.' },
+          { status: 401 },
+        ),
       ),
     )
 

@@ -1,7 +1,4 @@
-import type {
-  UserSettingsResource,
-  WorkspaceSettingsResource,
-} from '@/features/Settings/types'
+import type { UserSettingsResource, WorkspaceSettingsResource } from '@/features/Settings/types'
 
 export const defaultUserSettings: UserSettingsResource = {
   timezone: 'Asia/Dhaka',

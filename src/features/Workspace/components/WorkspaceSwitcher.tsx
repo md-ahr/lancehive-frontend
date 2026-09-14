@@ -18,8 +18,8 @@ export function WorkspaceSwitcher() {
   }
 
   const activeName =
-    memberships.find((membership) => String(membership.freelancer_id) === freelancerId)
-      ?.freelancer?.name ??
+    memberships.find((membership) => String(membership.freelancer_id) === freelancerId)?.freelancer
+      ?.name ??
     activeFreelancer?.name ??
     'Workspace'
 

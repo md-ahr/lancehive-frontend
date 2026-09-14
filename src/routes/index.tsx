@@ -7,6 +7,8 @@ import { RequireFreelancer } from '@/features/Auth/components/RequireFreelancer'
 import { ForgotPasswordPage } from '@/features/Auth/pages/ForgotPasswordPage'
 import { LoginPage } from '@/features/Auth/pages/LoginPage'
 import { ResetPasswordPage } from '@/features/Auth/pages/ResetPasswordPage'
+import { ClientDetailPage } from '@/features/Clients/pages/ClientDetailPage'
+import { ClientsPage } from '@/features/Clients/pages/ClientsPage'
 import { AppLayout } from '@/features/Layout/components/AppLayout'
 import { DashboardPage } from '@/features/Layout/pages/DashboardPage'
 import { NotFoundPage } from '@/features/Layout/pages/NotFoundPage'
@@ -30,8 +32,8 @@ export function AppRoutes() {
         <Route element={<RequireFreelancer />}>
           <Route path="/app" element={<AppLayout />}>
             <Route index element={<DashboardPage />} />
-            <Route path="clients" element={<PlaceholderPage title="Clients" />} />
-            <Route path="clients/:id" element={<PlaceholderPage title="Client detail" />} />
+            <Route path="clients" element={<ClientsPage />} />
+            <Route path="clients/:id" element={<ClientDetailPage />} />
             <Route path="projects" element={<PlaceholderPage title="Projects" />} />
             <Route path="projects/:id" element={<PlaceholderPage title="Project detail" />} />
             <Route path="invoices" element={<PlaceholderPage title="Invoices" />} />

@@ -2,12 +2,12 @@ import { renderHook, waitFor } from '@testing-library/react'
 import { http, HttpResponse } from 'msw'
 import { beforeEach, describe, expect, it } from 'vitest'
 
+import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { setToken } from '@/lib/auth-storage'
-import { server } from '@/test/msw/server'
 import { defaultUserSettings } from '@/test/fixtures/settings'
+import { server } from '@/test/msw/server'
 import { createWrapper } from '@/test/test-utils'
 
-import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { useMeSettings } from './useMeSettings'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'
@@ -34,7 +34,10 @@ describe('useMeSettings', () => {
 
     server.use(
       http.get(`${API_BASE_URL}/me/settings`, () =>
-        HttpResponse.json({ code: 'unauthenticated', message: 'Unauthenticated.' }, { status: 401 }),
+        HttpResponse.json(
+          { code: 'unauthenticated', message: 'Unauthenticated.' },
+          { status: 401 },
+        ),
       ),
     )
 

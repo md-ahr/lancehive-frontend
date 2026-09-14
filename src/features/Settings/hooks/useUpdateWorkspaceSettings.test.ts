@@ -1,15 +1,15 @@
 import { renderHook, waitFor } from '@testing-library/react'
-import { beforeEach, describe, expect, it } from 'vitest'
 import { http, HttpResponse } from 'msw'
+import { beforeEach, describe, expect, it } from 'vitest'
 
+import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
+import { useWorkspaceContext } from '@/features/Workspace/hooks/useWorkspaceContext'
 import { setToken } from '@/lib/auth-storage'
 import { ApiError } from '@/lib/errors'
 import { makeReadOnlyMeResponse } from '@/test/fixtures/auth'
 import { server } from '@/test/msw/server'
 import { createWrapper } from '@/test/test-utils'
 
-import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
-import { useWorkspaceContext } from '@/features/Workspace/hooks/useWorkspaceContext'
 import { useUpdateWorkspaceSettings } from './useUpdateWorkspaceSettings'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'
@@ -45,9 +45,7 @@ describe('useUpdateWorkspaceSettings', () => {
     setToken('test-token')
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
-    server.use(
-      http.get(`${API_BASE_URL}/me`, () => HttpResponse.json(makeReadOnlyMeResponse())),
-    )
+    server.use(http.get(`${API_BASE_URL}/me`, () => HttpResponse.json(makeReadOnlyMeResponse())))
 
     const { result } = renderHook(() => useWorkspaceMutationProbe(), {
       wrapper: createWrapper({ withWorkspace: true }),
