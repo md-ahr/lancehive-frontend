@@ -7,6 +7,7 @@ import { LoadingSkeleton } from '@/components/LoadingSkeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useClientList } from '@/features/Clients/hooks/useClientList'
 import { ProjectTasksTab } from '@/features/Tasks/components/ProjectTasksTab'
+import { TimeSummaryCard } from '@/features/TimeLogs/components/TimeSummaryCard'
 import { ApiError, getErrorCode } from '@/lib/errors'
 
 import { ProjectHeader } from '../components/ProjectHeader'
@@ -94,9 +95,7 @@ export function ProjectDetailPage() {
           <ProjectTasksTab projectId={project.id} />
         </TabsContent>
         <TabsContent value="time">
-          <div className="border-border bg-card text-muted-foreground border p-6 text-sm">
-            Time logs and summary for this project will appear here.
-          </div>
+          <TimeSummaryCard projectId={project.id} />
         </TabsContent>
         <TabsContent value="invoices">
           <div className="border-border bg-card text-muted-foreground border p-6 text-sm">

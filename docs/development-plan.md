@@ -452,19 +452,31 @@
 
 ## Phase 7 — Time Logs (P1)
 
-### TL-01 — Types + query keys | **Done when:** TimeLog types; keys; key test
+### TL-01 — Types + query keys
+**Done when:**
+- [x] TimeLog types; `timeLogKeys`; key test
 
-### TL-02 — Time log hooks | **API:** task time-logs CRUD | **Done when:** Hook MSW tests
+### TL-02 — Time log hooks
+**Done when:**
+- [x] Task time-logs CRUD hooks; hook MSW tests
 
-### TL-03 — useProjectTimeSummary | **Done when:** Hook test; unbilled hours shape
+### TL-03 — useProjectTimeSummary
+**Done when:**
+- [x] Hook test; unbilled hours shape
 
-### TL-04 — TimeLogForm | **Done when:** hours, description, logged_at; zod; form tests
+### TL-04 — TimeLogForm
+**Done when:**
+- [x] hours, description, logged_at; zod; form tests
 
-### TL-05 — TimeLogsList | **Done when:** DataTable; four states; component/integration tests
+### TL-05 — TimeLogsList
+**Done when:**
+- [x] DataTable; four states; component/integration tests
 
-### TL-06 — TimeSummaryCard | **Done when:** Displays summary; loading/error; component test
+### TL-06 — TimeSummaryCard
+**Done when:**
+- [x] Displays summary; loading/error; component test
 
-**Phase 7 exit:** Log time; view summary on project.
+**Phase 7 exit:** Log time; view summary on project. ✅
 
 ---
 

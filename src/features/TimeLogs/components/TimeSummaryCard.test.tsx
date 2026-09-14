@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 import { http, HttpResponse } from 'msw'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { WorkspaceProvider } from '@/features/Workspace/components/WorkspaceProvider'
@@ -8,27 +8,19 @@ import { setToken } from '@/lib/auth-storage'
 import { server } from '@/test/msw/server'
 import { renderWithProviders } from '@/test/test-utils'
 
-import { TaskDetailSheet } from './TaskDetailSheet'
+import { TimeSummaryCard } from './TimeSummaryCard'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'
 
-function renderSheet(
-  props: Partial<{
-    taskId: number | null
-    projectId: number
-    open: boolean
-    onOpenChange: (open: boolean) => void
-  }> = {},
-) {
-  const onOpenChange = vi.fn()
+function renderCard(projectId = 20) {
   return renderWithProviders(
     <WorkspaceProvider>
-      <TaskDetailSheet taskId={30} projectId={20} open onOpenChange={onOpenChange} {...props} />
+      <TimeSummaryCard projectId={projectId} />
     </WorkspaceProvider>,
   )
 }
 
-describe('TaskDetailSheet', () => {
+describe('TimeSummaryCard', () => {
   beforeEach(() => {
     localStorage.clear()
     useAuthStore.setState({ hasToken: false, isHydrated: true })
@@ -39,25 +31,14 @@ describe('TaskDetailSheet', () => {
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     server.use(
-      http.get(`${API_BASE_URL}/tasks/:id`, async () => {
+      http.get(`${API_BASE_URL}/projects/:projectId/time-summary`, async () => {
         await new Promise((resolve) => setTimeout(resolve, 100))
-        return HttpResponse.json({ id: 30, title: 'Homepage mockup' })
+        return HttpResponse.json({ project_id: 20, total_hours: '0.00' })
       }),
     )
 
-    renderSheet()
+    renderCard()
     expect(screen.getByTestId('loading-skeleton-card')).toBeInTheDocument()
-  })
-
-  it('shows not found when task is missing', async () => {
-    setToken('missing-task-detail')
-    useAuthStore.setState({ hasToken: true, isHydrated: true })
-
-    renderSheet()
-
-    await waitFor(() => {
-      expect(screen.getByText('Task not found')).toBeInTheDocument()
-    })
   })
 
   it('shows error state on failure', async () => {
@@ -65,30 +46,31 @@ describe('TaskDetailSheet', () => {
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     server.use(
-      http.get(`${API_BASE_URL}/tasks/:id`, () =>
+      http.get(`${API_BASE_URL}/projects/:projectId/time-summary`, () =>
         HttpResponse.json({ message: 'Server error' }, { status: 500 }),
       ),
     )
 
-    renderSheet()
+    renderCard()
 
     await waitFor(() => {
       expect(screen.getByText(/something went wrong/i)).toBeInTheDocument()
     })
   })
 
-  it('renders task details and time logs on success', async () => {
+  it('displays project time summary on success', async () => {
     setToken('test-token')
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
-    renderSheet()
+    renderCard()
 
     await waitFor(() => {
-      expect(screen.getByText('Homepage mockup')).toBeInTheDocument()
-      expect(screen.getByText('In Progress')).toBeInTheDocument()
-      expect(screen.getByText('Time logs')).toBeInTheDocument()
-      expect(screen.getByText('Initial wireframes')).toBeInTheDocument()
-      expect(screen.getByRole('button', { name: /log time/i })).toBeInTheDocument()
+      expect(screen.getByText('Total hours')).toBeInTheDocument()
+      expect(screen.getByText('6.50h')).toBeInTheDocument()
+      expect(screen.getByText('Billed hours')).toBeInTheDocument()
+      expect(screen.getByText('1.00h')).toBeInTheDocument()
+      expect(screen.getByText('Unbilled hours')).toBeInTheDocument()
+      expect(screen.getByText('5.50h')).toBeInTheDocument()
     })
   })
 })

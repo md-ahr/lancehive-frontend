@@ -1,4 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { http, HttpResponse } from 'msw'
 import { Route, Routes } from 'react-router-dom'
 import { beforeEach, describe, expect, it } from 'vitest'
@@ -87,6 +88,26 @@ describe('ProjectDetailPage', () => {
       expect(screen.getByRole('tab', { name: 'Invoices' })).toBeInTheDocument()
       expect(screen.getByText('Homepage mockup')).toBeInTheDocument()
       expect(screen.getByText('Navigation polish')).toBeInTheDocument()
+    })
+  })
+
+  it('shows time summary on the Time tab', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderPage()
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Website Redesign' })).toBeInTheDocument()
+    })
+
+    await userEvent.click(screen.getByRole('tab', { name: 'Time' }))
+
+    await waitFor(() => {
+      expect(screen.getByText('Total hours')).toBeInTheDocument()
+      expect(screen.getByText('6.50h')).toBeInTheDocument()
+      expect(screen.getByText('Unbilled hours')).toBeInTheDocument()
+      expect(screen.getByText('5.50h')).toBeInTheDocument()
     })
   })
 })

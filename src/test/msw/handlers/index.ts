@@ -6,6 +6,7 @@ import { membersHandlers } from './members'
 import { projectsHandlers } from './projects'
 import { settingsHandlers } from './settings'
 import { tasksHandlers } from './tasks'
+import { timeLogsHandlers } from './time-logs'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'
 
@@ -15,6 +16,7 @@ export const handlers = [
   ...clientsHandlers,
   ...projectsHandlers,
   ...tasksHandlers,
+  ...timeLogsHandlers,
   ...membersHandlers,
   ...settingsHandlers,
 ]

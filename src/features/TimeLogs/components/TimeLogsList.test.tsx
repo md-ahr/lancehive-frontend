@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { http, HttpResponse } from 'msw'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
 import { WorkspaceProvider } from '@/features/Workspace/components/WorkspaceProvider'
@@ -9,19 +9,21 @@ import { setToken } from '@/lib/auth-storage'
 import { server } from '@/test/msw/server'
 import { renderWithProviders } from '@/test/test-utils'
 
-import { ProjectTasksTab } from './ProjectTasksTab'
+import { TimeLogsList } from './TimeLogsList'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'
 
-function renderTab(projectId = 20) {
-  return renderWithProviders(
+function renderList(taskId = 30, projectId = 20) {
+  const onEdit = vi.fn()
+  renderWithProviders(
     <WorkspaceProvider>
-      <ProjectTasksTab projectId={projectId} />
+      <TimeLogsList taskId={taskId} projectId={projectId} onEdit={onEdit} />
     </WorkspaceProvider>,
   )
+  return { onEdit }
 }
 
-describe('ProjectTasksTab', () => {
+describe('TimeLogsList', () => {
   beforeEach(() => {
     localStorage.clear()
     useAuthStore.setState({ hasToken: false, isHydrated: true })
@@ -32,7 +34,7 @@ describe('ProjectTasksTab', () => {
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     server.use(
-      http.get(`${API_BASE_URL}/projects/:projectId/tasks`, async () => {
+      http.get(`${API_BASE_URL}/tasks/:taskId/time-logs`, async () => {
         await new Promise((resolve) => setTimeout(resolve, 100))
         return HttpResponse.json({
           data: [],
@@ -42,18 +44,18 @@ describe('ProjectTasksTab', () => {
       }),
     )
 
-    renderTab()
+    renderList()
     expect(screen.getByTestId('loading-skeleton-table')).toBeInTheDocument()
   })
 
-  it('shows empty state when there are no tasks', async () => {
-    setToken('empty-task-list')
+  it('shows empty state when there are no time logs', async () => {
+    setToken('empty-time-log-list')
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
-    renderTab(999)
+    renderList(999)
 
     await waitFor(() => {
-      expect(screen.getByText('No tasks yet')).toBeInTheDocument()
+      expect(screen.getByText('No time logged yet')).toBeInTheDocument()
     })
   })
 
@@ -62,62 +64,46 @@ describe('ProjectTasksTab', () => {
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     server.use(
-      http.get(`${API_BASE_URL}/projects/:projectId/tasks`, () =>
+      http.get(`${API_BASE_URL}/tasks/:taskId/time-logs`, () =>
         HttpResponse.json({ message: 'Server error' }, { status: 500 }),
       ),
     )
 
-    renderTab()
+    renderList()
 
     await waitFor(() => {
       expect(screen.getByText(/something went wrong/i)).toBeInTheDocument()
     })
   })
 
-  it('renders project tasks on success', async () => {
+  it('renders time logs on success', async () => {
     setToken('test-token')
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
-    renderTab()
+    renderList()
 
     await waitFor(() => {
-      expect(screen.getByText('Homepage mockup')).toBeInTheDocument()
-      expect(screen.getByText('Navigation polish')).toBeInTheDocument()
+      expect(screen.getByText('Initial wireframes')).toBeInTheDocument()
+      expect(screen.getByText('Review meeting')).toBeInTheDocument()
+      expect(screen.getByText('Billed')).toBeInTheDocument()
+      expect(screen.getByText('Unbilled')).toBeInTheDocument()
     })
   })
 
-  it('opens create dialog from tab action', async () => {
+  it('calls onEdit when edit is clicked', async () => {
     setToken('test-token')
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
-    renderTab()
+    const { onEdit } = renderList()
 
     await waitFor(() => {
-      expect(screen.getByText('Homepage mockup')).toBeInTheDocument()
-    })
-
-    await userEvent.click(screen.getByRole('button', { name: /create task/i }))
-
-    await waitFor(() => {
-      expect(screen.getByRole('heading', { name: 'Create task' })).toBeInTheDocument()
-    })
-  })
-
-  it('opens task detail sheet on row click', async () => {
-    setToken('test-token')
-    useAuthStore.setState({ hasToken: true, isHydrated: true })
-
-    renderTab()
-
-    await waitFor(() => {
-      expect(screen.getByText('Homepage mockup')).toBeInTheDocument()
-    })
-
-    await userEvent.click(screen.getByText('Homepage mockup'))
-
-    await waitFor(() => {
-      expect(screen.getByText('Time logs')).toBeInTheDocument()
       expect(screen.getByText('Initial wireframes')).toBeInTheDocument()
     })
+
+    await userEvent.click(screen.getByRole('button', { name: /edit time log/i }))
+
+    expect(onEdit).toHaveBeenCalledWith(
+      expect.objectContaining({ id: 40, description: 'Initial wireframes' }),
+    )
   })
 })

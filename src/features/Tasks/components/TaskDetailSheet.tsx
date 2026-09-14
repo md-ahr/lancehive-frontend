@@ -2,6 +2,8 @@ import { useState } from 'react'
 
 import { Pencil, Trash2 } from 'lucide-react'
 
+import type { TimeLogResource } from '@/features/TimeLogs/types'
+
 import { ErrorAlert } from '@/components/ErrorAlert'
 import { LoadingSkeleton } from '@/components/LoadingSkeleton'
 import { Badge } from '@/components/ui/badge'
@@ -13,6 +15,8 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet'
+import { TimeLogForm } from '@/features/TimeLogs/components/TimeLogForm'
+import { TimeLogsList } from '@/features/TimeLogs/components/TimeLogsList'
 import { useCanWrite } from '@/features/Workspace/hooks/useCanWrite'
 import { ApiError, getErrorCode } from '@/lib/errors'
 
@@ -52,6 +56,7 @@ export function TaskDetailSheet({ taskId, projectId, open, onOpenChange }: TaskD
   const canWrite = useCanWrite()
   const [editOpen, setEditOpen] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
+  const [editingTimeLog, setEditingTimeLog] = useState<TimeLogResource | null>(null)
   const taskQuery = useTask(taskId ? String(taskId) : undefined)
 
   const headerActions =
@@ -118,11 +123,21 @@ export function TaskDetailSheet({ taskId, projectId, open, onOpenChange }: TaskD
           </dl>
         </div>
 
-        <div className="border-border bg-card space-y-2 border p-4">
+        <div className="border-border bg-card space-y-4 border p-4">
           <h3 className="text-sm font-medium">Time logs</h3>
-          <p className="text-muted-foreground text-sm">
-            Time entries for this task will appear here.
-          </p>
+          {canWrite ? (
+            <TimeLogForm
+              taskId={task.id}
+              projectId={projectId}
+              timeLog={editingTimeLog ?? undefined}
+              onCancelEdit={() => setEditingTimeLog(null)}
+            />
+          ) : null}
+          <TimeLogsList
+            taskId={task.id}
+            projectId={projectId}
+            onEdit={canWrite ? (timeLog) => setEditingTimeLog(timeLog) : undefined}
+          />
         </div>
 
         <TaskFormDialog
