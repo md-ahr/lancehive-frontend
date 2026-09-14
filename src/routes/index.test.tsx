@@ -125,6 +125,18 @@ describe('AppRoutes', () => {
     })
   })
 
+  it('loads subscription page route', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/app/subscription' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Subscription' })).toBeInTheDocument()
+      expect(screen.getByText('Starter')).toBeInTheDocument()
+    })
+  })
+
   it('navigates to user settings from app shell', async () => {
     setToken('test-token')
     useAuthStore.setState({ hasToken: true, isHydrated: true })

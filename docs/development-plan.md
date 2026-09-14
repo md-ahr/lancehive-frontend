@@ -576,19 +576,24 @@
 
 ---
 
-## Phase 11 — Subscription (P2)
+## Phase 11 — Subscription (P2) ✅
 
 ### SUB-01 — Subscription hooks | **Done when:** GET subscription; MSW test
+- [x] `useSubscription` + `subscriptionKeys`; MSW handler/tests
 
 ### SUB-02 — Checkout/cancel/swap mutations | **Done when:** Hook tests each
+- [x] `useCheckoutSubscription`, `useCancelSubscription`, `useSwapSubscription`; hook tests each
 
 ### SUB-03 — SubscriptionPage | **Done when:** Owner gate; plan status; four states; integration tests
+- [x] `PlanStatusCard`, `CheckoutButton`, `CancelPlanDialog`; owner gate; four states; integration tests
 
 ### SUB-04 — Checkout redirect | **Done when:** Opens checkout_url; unit test window.location assign mock
+- [x] `redirectToCheckout` + `CheckoutButton` redirect; unit test with `window.location.assign` mock
 
 ### SUB-05 — Route `/app/subscription` | **Done when:** Wired + integration test
+- [x] Route wired; routes integration test
 
-**Phase 11 exit:** Owner checkout flow; writable when workspace read-only.
+**Phase 11 exit:** Owner checkout flow; writable when workspace read-only. ✅
 
 ---
 

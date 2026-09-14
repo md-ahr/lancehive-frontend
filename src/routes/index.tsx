@@ -25,6 +25,7 @@ import { ProjectDetailPage } from '@/features/Projects/pages/ProjectDetailPage'
 import { ProjectsPage } from '@/features/Projects/pages/ProjectsPage'
 import { UserSettingsPage } from '@/features/Settings/pages/UserSettingsPage'
 import { WorkspaceSettingsPage } from '@/features/Settings/pages/WorkspaceSettingsPage'
+import { SubscriptionPage } from '@/features/Subscription/pages/SubscriptionPage'
 
 export function AppRoutes() {
   return (
@@ -50,7 +51,7 @@ export function AppRoutes() {
             <Route path="members" element={<MembersPage />} />
             <Route path="settings" element={<UserSettingsPage />} />
             <Route path="workspace" element={<WorkspaceSettingsPage />} />
-            <Route path="subscription" element={<PlaceholderPage title="Subscription" />} />
+            <Route path="subscription" element={<SubscriptionPage />} />
           </Route>
         </Route>
 

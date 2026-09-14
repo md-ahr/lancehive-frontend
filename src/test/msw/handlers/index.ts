@@ -8,6 +8,7 @@ import { membersHandlers } from './members'
 import { portalHandlers } from './portal'
 import { projectsHandlers } from './projects'
 import { settingsHandlers } from './settings'
+import { subscriptionHandlers } from './subscription'
 import { tasksHandlers } from './tasks'
 import { timeLogsHandlers } from './time-logs'
 
@@ -25,4 +26,5 @@ export const handlers = [
   ...membersHandlers,
   ...portalHandlers,
   ...settingsHandlers,
+  ...subscriptionHandlers,
 ]
