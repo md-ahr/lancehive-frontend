@@ -7,6 +7,7 @@ import { ErrorAlert } from '@/components/ErrorAlert'
 import { LoadingSkeleton } from '@/components/LoadingSkeleton'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { ClientProjectsTab } from '@/features/Projects/components/ClientProjectsTab'
 import { useCanWrite } from '@/features/Workspace/hooks/useCanWrite'
 import { ApiError, getErrorCode } from '@/lib/errors'
 
@@ -91,9 +92,7 @@ export function ClientDetailPage() {
           <TabsTrigger value="members">Members</TabsTrigger>
         </TabsList>
         <TabsContent value="projects">
-          <div className="border-border bg-card text-muted-foreground border p-6 text-sm">
-            Projects for this client will appear here.
-          </div>
+          <ClientProjectsTab clientId={client.id} />
         </TabsContent>
         <TabsContent value="members">
           <div className="border-border bg-card text-muted-foreground border p-6 text-sm">

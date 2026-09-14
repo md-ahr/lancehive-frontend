@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { http, HttpResponse } from 'msw'
-import { Route, Routes } from 'react-router-dom'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
@@ -9,22 +9,19 @@ import { setToken } from '@/lib/auth-storage'
 import { server } from '@/test/msw/server'
 import { renderWithProviders } from '@/test/test-utils'
 
-import { ClientDetailPage } from './ClientDetailPage'
+import { ClientProjectsTab } from './ClientProjectsTab'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'
 
-function renderPage(route = '/app/clients/10') {
+function renderTab(clientId = 10) {
   return renderWithProviders(
     <WorkspaceProvider>
-      <Routes>
-        <Route path="/app/clients/:id" element={<ClientDetailPage />} />
-      </Routes>
+      <ClientProjectsTab clientId={clientId} />
     </WorkspaceProvider>,
-    { route },
   )
 }
 
-describe('ClientDetailPage', () => {
+describe('ClientProjectsTab', () => {
   beforeEach(() => {
     localStorage.clear()
     useAuthStore.setState({ hasToken: false, isHydrated: true })
@@ -35,24 +32,28 @@ describe('ClientDetailPage', () => {
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     server.use(
-      http.get(`${API_BASE_URL}/clients/:id`, async () => {
+      http.get(`${API_BASE_URL}/clients/:clientId/projects`, async () => {
         await new Promise((resolve) => setTimeout(resolve, 100))
-        return HttpResponse.json({ id: 10, name: 'BigCo Ltd' })
+        return HttpResponse.json({
+          data: [],
+          meta: { per_page: 25, next_cursor: null, prev_cursor: null },
+          links: {},
+        })
       }),
     )
 
-    renderPage()
-    expect(screen.getByTestId('loading-skeleton-page')).toBeInTheDocument()
+    renderTab()
+    expect(screen.getByTestId('loading-skeleton-table')).toBeInTheDocument()
   })
 
-  it('shows not found when client is missing', async () => {
-    setToken('missing-detail')
+  it('shows empty state when there are no projects', async () => {
+    setToken('empty-project-list')
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
-    renderPage()
+    renderTab(999)
 
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: 'Client not found' })).toBeInTheDocument()
+      expect(screen.getByText('No projects yet')).toBeInTheDocument()
     })
   })
 
@@ -61,31 +62,46 @@ describe('ClientDetailPage', () => {
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     server.use(
-      http.get(`${API_BASE_URL}/clients/:id`, () =>
+      http.get(`${API_BASE_URL}/clients/:clientId/projects`, () =>
         HttpResponse.json({ message: 'Server error' }, { status: 500 }),
       ),
     )
 
-    renderPage()
+    renderTab()
 
     await waitFor(() => {
       expect(screen.getByText(/something went wrong/i)).toBeInTheDocument()
     })
   })
 
-  it('renders client header and tabs on success', async () => {
+  it('renders client projects on success', async () => {
     setToken('test-token')
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
-    renderPage()
+    renderTab()
 
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: 'BigCo Ltd' })).toBeInTheDocument()
-      expect(screen.getByText('billing@bigco.com')).toBeInTheDocument()
-      expect(screen.getByRole('tab', { name: 'Projects' })).toBeInTheDocument()
-      expect(screen.getByRole('tab', { name: 'Members' })).toBeInTheDocument()
       expect(screen.getByText('Website Redesign')).toBeInTheDocument()
       expect(screen.getByText('Mobile App')).toBeInTheDocument()
+      expect(screen.queryByText('Brand Refresh')).not.toBeInTheDocument()
+    })
+  })
+
+  it('opens create dialog from tab action', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderTab()
+
+    await waitFor(() => {
+      expect(screen.getByText('Website Redesign')).toBeInTheDocument()
+    })
+
+    await userEvent.click(screen.getByRole('button', { name: /create project/i }))
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Create project' })).toBeInTheDocument()
+      expect(screen.queryByLabelText('Client')).not.toBeInTheDocument()
     })
   })
 })

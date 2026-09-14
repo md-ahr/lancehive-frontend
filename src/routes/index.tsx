@@ -14,6 +14,8 @@ import { DashboardPage } from '@/features/Layout/pages/DashboardPage'
 import { NotFoundPage } from '@/features/Layout/pages/NotFoundPage'
 import { PlaceholderPage } from '@/features/Layout/pages/PlaceholderPage'
 import { MembersPage } from '@/features/Members/pages/MembersPage'
+import { ProjectDetailPage } from '@/features/Projects/pages/ProjectDetailPage'
+import { ProjectsPage } from '@/features/Projects/pages/ProjectsPage'
 import { UserSettingsPage } from '@/features/Settings/pages/UserSettingsPage'
 import { WorkspaceSettingsPage } from '@/features/Settings/pages/WorkspaceSettingsPage'
 
@@ -34,8 +36,8 @@ export function AppRoutes() {
             <Route index element={<DashboardPage />} />
             <Route path="clients" element={<ClientsPage />} />
             <Route path="clients/:id" element={<ClientDetailPage />} />
-            <Route path="projects" element={<PlaceholderPage title="Projects" />} />
-            <Route path="projects/:id" element={<PlaceholderPage title="Project detail" />} />
+            <Route path="projects" element={<ProjectsPage />} />
+            <Route path="projects/:id" element={<ProjectDetailPage />} />
             <Route path="invoices" element={<PlaceholderPage title="Invoices" />} />
             <Route path="invoices/:id" element={<PlaceholderPage title="Invoice detail" />} />
             <Route path="members" element={<MembersPage />} />

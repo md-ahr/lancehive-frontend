@@ -388,25 +388,39 @@
 
 ## Phase 5 — Projects (P1)
 
-### P-01 — Types + query keys | **Done when:** Project types; `projectKeys`; key test
+### P-01 — Types + query keys
+**Done when:**
+- [x] Project types; `projectKeys`; key test
 
 ### P-02 — useProjectList, useClientProjects
-**Done when:** Both list hooks + MSW tests
+**Done when:**
+- [x] Both list hooks + MSW tests
 
 ### P-03 — Project CRUD hooks
-**Done when:** Nested create under client; hook tests
+**Done when:**
+- [x] Nested create under client; hook tests
 
-### P-04 — ProjectsPage | **Done when:** Cross-client table; four states + pagination tests
+### P-04 — ProjectsPage
+**Done when:**
+- [x] Cross-client table; four states + pagination tests
 
-### P-05 — ClientProjectsTab | **Done when:** Tab on ClientDetailPage; integration tests
+### P-05 — ClientProjectsTab
+**Done when:**
+- [x] Tab on ClientDetailPage; integration tests
 
-### P-06 — ProjectFormDialog | **Done when:** Client selector on global create; form tests
+### P-06 — ProjectFormDialog
+**Done when:**
+- [x] Client selector on global create; form tests
 
-### P-07 — ProjectDetailPage | **Done when:** Tabs shell (Tasks, Time, Invoices placeholders); integration tests
+### P-07 — ProjectDetailPage
+**Done when:**
+- [x] Tabs shell (Tasks, Time, Invoices placeholders); integration tests
 
-### P-08 — Routes | **Done when:** `/app/projects`, `/app/projects/:id` wired + test
+### P-08 — Routes
+**Done when:**
+- [x] `/app/projects`, `/app/projects/:id` wired + test
 
-**Phase 5 exit:** Client → Project navigation works.
+**Phase 5 exit:** Client → Project navigation works. ✅
 
 ---
 

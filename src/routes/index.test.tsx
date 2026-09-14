@@ -70,6 +70,28 @@ describe('AppRoutes', () => {
     })
   })
 
+  it('loads projects page route', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/app/projects' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Projects' })).toBeInTheDocument()
+    })
+  })
+
+  it('loads project detail route', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/app/projects/20' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Website Redesign' })).toBeInTheDocument()
+    })
+  })
+
   it('loads members page route', async () => {
     setToken('test-token')
     useAuthStore.setState({ hasToken: true, isHydrated: true })

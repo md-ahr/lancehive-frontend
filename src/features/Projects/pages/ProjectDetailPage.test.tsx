@@ -9,22 +9,22 @@ import { setToken } from '@/lib/auth-storage'
 import { server } from '@/test/msw/server'
 import { renderWithProviders } from '@/test/test-utils'
 
-import { ClientDetailPage } from './ClientDetailPage'
+import { ProjectDetailPage } from './ProjectDetailPage'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'
 
-function renderPage(route = '/app/clients/10') {
+function renderPage(route = '/app/projects/20') {
   return renderWithProviders(
     <WorkspaceProvider>
       <Routes>
-        <Route path="/app/clients/:id" element={<ClientDetailPage />} />
+        <Route path="/app/projects/:id" element={<ProjectDetailPage />} />
       </Routes>
     </WorkspaceProvider>,
     { route },
   )
 }
 
-describe('ClientDetailPage', () => {
+describe('ProjectDetailPage', () => {
   beforeEach(() => {
     localStorage.clear()
     useAuthStore.setState({ hasToken: false, isHydrated: true })
@@ -35,9 +35,9 @@ describe('ClientDetailPage', () => {
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     server.use(
-      http.get(`${API_BASE_URL}/clients/:id`, async () => {
+      http.get(`${API_BASE_URL}/projects/:id`, async () => {
         await new Promise((resolve) => setTimeout(resolve, 100))
-        return HttpResponse.json({ id: 10, name: 'BigCo Ltd' })
+        return HttpResponse.json({ id: 20, name: 'Website Redesign' })
       }),
     )
 
@@ -45,14 +45,14 @@ describe('ClientDetailPage', () => {
     expect(screen.getByTestId('loading-skeleton-page')).toBeInTheDocument()
   })
 
-  it('shows not found when client is missing', async () => {
-    setToken('missing-detail')
+  it('shows not found when project is missing', async () => {
+    setToken('missing-project-detail')
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     renderPage()
 
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: 'Client not found' })).toBeInTheDocument()
+      expect(screen.getByRole('heading', { name: 'Project not found' })).toBeInTheDocument()
     })
   })
 
@@ -61,7 +61,7 @@ describe('ClientDetailPage', () => {
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     server.use(
-      http.get(`${API_BASE_URL}/clients/:id`, () =>
+      http.get(`${API_BASE_URL}/projects/:id`, () =>
         HttpResponse.json({ message: 'Server error' }, { status: 500 }),
       ),
     )
@@ -73,19 +73,19 @@ describe('ClientDetailPage', () => {
     })
   })
 
-  it('renders client header and tabs on success', async () => {
+  it('renders project header and tabs on success', async () => {
     setToken('test-token')
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     renderPage()
 
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: 'BigCo Ltd' })).toBeInTheDocument()
-      expect(screen.getByText('billing@bigco.com')).toBeInTheDocument()
-      expect(screen.getByRole('tab', { name: 'Projects' })).toBeInTheDocument()
-      expect(screen.getByRole('tab', { name: 'Members' })).toBeInTheDocument()
-      expect(screen.getByText('Website Redesign')).toBeInTheDocument()
-      expect(screen.getByText('Mobile App')).toBeInTheDocument()
+      expect(screen.getByRole('heading', { name: 'Website Redesign' })).toBeInTheDocument()
+      expect(screen.getByText('BigCo Ltd')).toBeInTheDocument()
+      expect(screen.getByRole('tab', { name: 'Tasks' })).toBeInTheDocument()
+      expect(screen.getByRole('tab', { name: 'Time' })).toBeInTheDocument()
+      expect(screen.getByRole('tab', { name: 'Invoices' })).toBeInTheDocument()
+      expect(screen.getByText('Tasks for this project will appear here.')).toBeInTheDocument()
     })
   })
 })

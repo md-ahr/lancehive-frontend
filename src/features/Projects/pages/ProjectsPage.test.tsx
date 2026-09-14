@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { http, HttpResponse } from 'msw'
-import { Route, Routes } from 'react-router-dom'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
@@ -9,22 +9,19 @@ import { setToken } from '@/lib/auth-storage'
 import { server } from '@/test/msw/server'
 import { renderWithProviders } from '@/test/test-utils'
 
-import { ClientDetailPage } from './ClientDetailPage'
+import { ProjectsPage } from './ProjectsPage'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'
 
-function renderPage(route = '/app/clients/10') {
+function renderPage() {
   return renderWithProviders(
     <WorkspaceProvider>
-      <Routes>
-        <Route path="/app/clients/:id" element={<ClientDetailPage />} />
-      </Routes>
+      <ProjectsPage />
     </WorkspaceProvider>,
-    { route },
   )
 }
 
-describe('ClientDetailPage', () => {
+describe('ProjectsPage', () => {
   beforeEach(() => {
     localStorage.clear()
     useAuthStore.setState({ hasToken: false, isHydrated: true })
@@ -35,9 +32,13 @@ describe('ClientDetailPage', () => {
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     server.use(
-      http.get(`${API_BASE_URL}/clients/:id`, async () => {
+      http.get(`${API_BASE_URL}/projects`, async () => {
         await new Promise((resolve) => setTimeout(resolve, 100))
-        return HttpResponse.json({ id: 10, name: 'BigCo Ltd' })
+        return HttpResponse.json({
+          data: [],
+          meta: { per_page: 25, next_cursor: null, prev_cursor: null },
+          links: {},
+        })
       }),
     )
 
@@ -45,14 +46,14 @@ describe('ClientDetailPage', () => {
     expect(screen.getByTestId('loading-skeleton-page')).toBeInTheDocument()
   })
 
-  it('shows not found when client is missing', async () => {
-    setToken('missing-detail')
+  it('shows empty state when there are no projects', async () => {
+    setToken('empty-project-list')
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     renderPage()
 
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: 'Client not found' })).toBeInTheDocument()
+      expect(screen.getByText('No projects yet')).toBeInTheDocument()
     })
   })
 
@@ -61,7 +62,7 @@ describe('ClientDetailPage', () => {
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     server.use(
-      http.get(`${API_BASE_URL}/clients/:id`, () =>
+      http.get(`${API_BASE_URL}/projects`, () =>
         HttpResponse.json({ message: 'Server error' }, { status: 500 }),
       ),
     )
@@ -73,19 +74,38 @@ describe('ClientDetailPage', () => {
     })
   })
 
-  it('renders client header and tabs on success', async () => {
+  it('renders project rows on success', async () => {
     setToken('test-token')
     useAuthStore.setState({ hasToken: true, isHydrated: true })
 
     renderPage()
 
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: 'BigCo Ltd' })).toBeInTheDocument()
-      expect(screen.getByText('billing@bigco.com')).toBeInTheDocument()
-      expect(screen.getByRole('tab', { name: 'Projects' })).toBeInTheDocument()
-      expect(screen.getByRole('tab', { name: 'Members' })).toBeInTheDocument()
+      expect(screen.getByRole('heading', { name: 'Projects' })).toBeInTheDocument()
       expect(screen.getByText('Website Redesign')).toBeInTheDocument()
       expect(screen.getByText('Mobile App')).toBeInTheDocument()
+      expect(screen.getByText('Brand Refresh')).toBeInTheDocument()
+      expect(screen.getByText('Acme Studio')).toBeInTheDocument()
+      expect(screen.getAllByText('BigCo Ltd')).toHaveLength(2)
+    })
+  })
+
+  it('paginates projects with cursor controls', async () => {
+    setToken('paginated-project-list')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderPage()
+
+    await waitFor(() => {
+      expect(screen.getByText('Website Redesign')).toBeInTheDocument()
+      expect(screen.getByText('Mobile App')).toBeInTheDocument()
+      expect(screen.queryByText('Page Two Project')).not.toBeInTheDocument()
+    })
+
+    await userEvent.click(screen.getByRole('button', { name: /next/i }))
+
+    await waitFor(() => {
+      expect(screen.getByText('Page Two Project')).toBeInTheDocument()
     })
   })
 })
