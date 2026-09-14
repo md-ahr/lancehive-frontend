@@ -92,6 +92,28 @@ describe('AppRoutes', () => {
     })
   })
 
+  it('loads invoices page route', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/app/invoices' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Invoices' })).toBeInTheDocument()
+    })
+  })
+
+  it('loads invoice detail route', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/app/invoices/50' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'INV-2026-0001' })).toBeInTheDocument()
+    })
+  })
+
   it('loads members page route', async () => {
     setToken('test-token')
     useAuthStore.setState({ hasToken: true, isHydrated: true })

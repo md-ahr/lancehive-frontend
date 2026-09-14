@@ -6,6 +6,7 @@ import { ErrorAlert } from '@/components/ErrorAlert'
 import { LoadingSkeleton } from '@/components/LoadingSkeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useClientList } from '@/features/Clients/hooks/useClientList'
+import { ProjectInvoicesTab } from '@/features/Invoices/components/ProjectInvoicesTab'
 import { ProjectTasksTab } from '@/features/Tasks/components/ProjectTasksTab'
 import { TimeSummaryCard } from '@/features/TimeLogs/components/TimeSummaryCard'
 import { ApiError, getErrorCode } from '@/lib/errors'
@@ -98,9 +99,7 @@ export function ProjectDetailPage() {
           <TimeSummaryCard projectId={project.id} />
         </TabsContent>
         <TabsContent value="invoices">
-          <div className="border-border bg-card text-muted-foreground border p-6 text-sm">
-            Invoices for this project will appear here.
-          </div>
+          <ProjectInvoicesTab projectId={project.id} />
         </TabsContent>
       </Tabs>
     </div>

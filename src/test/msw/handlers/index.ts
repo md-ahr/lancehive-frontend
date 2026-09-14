@@ -2,6 +2,7 @@ import { http, HttpResponse } from 'msw'
 
 import { authHandlers } from './auth'
 import { clientsHandlers } from './clients'
+import { invoicesHandlers } from './invoices'
 import { membersHandlers } from './members'
 import { projectsHandlers } from './projects'
 import { settingsHandlers } from './settings'
@@ -17,6 +18,7 @@ export const handlers = [
   ...projectsHandlers,
   ...tasksHandlers,
   ...timeLogsHandlers,
+  ...invoicesHandlers,
   ...membersHandlers,
   ...settingsHandlers,
 ]

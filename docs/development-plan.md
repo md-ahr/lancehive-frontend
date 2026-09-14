@@ -25,7 +25,7 @@
 
 ---
 
-## Phase 0 — Foundation (P0)
+## Phase 0 — Foundation (P0) ✅
 
 ### F-01 — Install stack
 **Output:** `package.json`, `components.json`, Tailwind config  
@@ -162,7 +162,7 @@
 - [x] `src/test/msw/server.ts` + sample handler
 - [x] `pnpm test` runs (even if zero tests)
 
-**Phase 0 exit:** App boots; shared components tested; `pnpm test` works.
+**Phase 0 exit:** App boots; shared components tested; `pnpm test` works. ✅
 
 ---
 
@@ -272,7 +272,7 @@
 
 ---
 
-## Phase 2 — App Shell (P1)
+## Phase 2 — App Shell (P1) ✅
 
 ### S-01 — useUpdateMeSettings | **API:** `PATCH /me/settings`
 **Done when:**
@@ -386,7 +386,7 @@
 
 ---
 
-## Phase 5 — Projects (P1)
+## Phase 5 — Projects (P1) ✅
 
 ### P-01 — Types + query keys
 **Done when:**
@@ -414,7 +414,7 @@
 
 ### P-07 — ProjectDetailPage
 **Done when:**
-- [x] Tabs shell (Tasks, Time, Invoices placeholders); integration tests
+- [x] Tabs shell (Tasks, Time, Invoices); integration tests
 
 ### P-08 — Routes
 **Done when:**
@@ -424,7 +424,7 @@
 
 ---
 
-## Phase 6 — Tasks (P1)
+## Phase 6 — Tasks (P1) ✅
 
 ### T-01 — Types + query keys
 **Done when:**
@@ -444,13 +444,13 @@
 
 ### T-05 — TaskDetailPage or Sheet
 **Done when:**
-- [x] Shows task + time log section placeholder; integration tests
+- [x] Shows task + time logs section; integration tests
 
 **Phase 6 exit:** Tasks under project; CRUD tested. ✅
 
 ---
 
-## Phase 7 — Time Logs (P1)
+## Phase 7 — Time Logs (P1) ✅
 
 ### TL-01 — Types + query keys
 **Done when:**
@@ -480,31 +480,53 @@
 
 ---
 
-## Phase 8 — Invoices (P1)
+## Phase 8 — Invoices (P1) ✅
 
-### I-01 — Types + query keys | **Done when:** Invoice types; `invoiceKeys`; key test
+### I-01 — Types + query keys
+**Done when:**
+- [x] Invoice types; `invoiceKeys`; key test
 
-### I-02 — List + detail hooks | **Done when:** MSW tests
+### I-02 — List + detail hooks
+**Done when:**
+- [x] MSW tests
 
-### I-03 — useCreateClientInvoice | **Done when:** prefill_unbilled_time option; hook test
+### I-03 — useCreateClientInvoice
+**Done when:**
+- [x] prefill_unbilled_time option; hook test
 
-### I-04 — Invoice mutation hooks | **Done when:** update, add item, payment, void; hook tests each
+### I-04 — Invoice mutation hooks
+**Done when:**
+- [x] update, add item, payment, void; hook tests each
 
-### I-05 — InvoicesPage | **Done when:** Status badges + filter; four states + pagination tests
+### I-05 — InvoicesPage
+**Done when:**
+- [x] Status badges + filter; four states + pagination tests
 
-### I-06 — InvoiceDetailPage | **Done when:** Items table, balance, actions; integration tests all states
+### I-06 — InvoiceDetailPage
+**Done when:**
+- [x] Items table, balance, actions; integration tests all states
 
-### I-07 — CreateInvoiceDialog | **Done when:** prefill toggle; integration tests
+### I-07 — CreateInvoiceDialog
+**Done when:**
+- [x] prefill toggle; integration tests
 
-### I-08 — AddInvoiceItemDialog, RecordPaymentDialog | **Done when:** Form tests each
+### I-08 — AddInvoiceItemDialog, RecordPaymentDialog
+**Done when:**
+- [x] Form tests each
 
-### I-09 — InvoiceStatusActions | **Done when:** draft→sent, void confirm; integration tests
+### I-09 — InvoiceStatusActions
+**Done when:**
+- [x] draft→sent, void confirm; integration tests
 
-### I-10 — ProjectInvoicesTab | **Done when:** Tab integration tests
+### I-10 — ProjectInvoicesTab
+**Done when:**
+- [x] Tab integration tests
 
-### I-11 — Routes | **Done when:** `/app/invoices`, `/app/invoices/:id` + tests
+### I-11 — Routes
+**Done when:**
+- [x] `/app/invoices`, `/app/invoices/:id` + tests
 
-**Phase 8 exit:** Invoice lifecycle draft → sent → payment; tests green.
+**Phase 8 exit:** Invoice lifecycle draft → sent → payment; tests green. ✅
 
 ---
 

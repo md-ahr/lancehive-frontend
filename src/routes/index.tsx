@@ -9,6 +9,8 @@ import { LoginPage } from '@/features/Auth/pages/LoginPage'
 import { ResetPasswordPage } from '@/features/Auth/pages/ResetPasswordPage'
 import { ClientDetailPage } from '@/features/Clients/pages/ClientDetailPage'
 import { ClientsPage } from '@/features/Clients/pages/ClientsPage'
+import { InvoiceDetailPage } from '@/features/Invoices/pages/InvoiceDetailPage'
+import { InvoicesPage } from '@/features/Invoices/pages/InvoicesPage'
 import { AppLayout } from '@/features/Layout/components/AppLayout'
 import { DashboardPage } from '@/features/Layout/pages/DashboardPage'
 import { NotFoundPage } from '@/features/Layout/pages/NotFoundPage'
@@ -38,8 +40,8 @@ export function AppRoutes() {
             <Route path="clients/:id" element={<ClientDetailPage />} />
             <Route path="projects" element={<ProjectsPage />} />
             <Route path="projects/:id" element={<ProjectDetailPage />} />
-            <Route path="invoices" element={<PlaceholderPage title="Invoices" />} />
-            <Route path="invoices/:id" element={<PlaceholderPage title="Invoice detail" />} />
+            <Route path="invoices" element={<InvoicesPage />} />
+            <Route path="invoices/:id" element={<InvoiceDetailPage />} />
             <Route path="members" element={<MembersPage />} />
             <Route path="settings" element={<UserSettingsPage />} />
             <Route path="workspace" element={<WorkspaceSettingsPage />} />
