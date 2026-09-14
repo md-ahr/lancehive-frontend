@@ -4,7 +4,9 @@
 >
 > **Before starting a task:** read its **Done when** below + [standards/definition-of-done.md](./standards/definition-of-done.md).
 >
-> **Workflow:** Discover → Scaffold → Data → State → Compose → Styles → **Test** → Verify → Audit
+> **Workflow:** **Context** (ask if blocked) → Discover → Scaffold → Data → State → Compose → Styles → **Test** → Verify → Audit
+>
+> **Context:** See [context-request-protocol.md](./context-request-protocol.md) — agents must ask the owner when task scope, API, design, or environment is unclear.
 
 ---
 
@@ -151,7 +153,7 @@
 ---
 
 ### F-13 — Vitest + MSW setup
-**Output:** `vitest.config.ts`, `src/test/*`  
+**Output:** `vite.config.ts` (test block), `src/test/*`  
 **Depends:** F-02 | **Tests:** N/A (infra)
 
 **Done when:**

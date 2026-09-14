@@ -2,8 +2,13 @@
 
 Follow on every task. Rules auto-load from `.cursor/rules/`; invoke skills from `.cursor/skills/`.
 
+## Context — ask when blocked
+
+If task scope, API, design, or environment is unclear after reading docs and code, **ask the project owner** — do not guess. See [context-request-protocol.md](./docs/context-request-protocol.md). Rule: `ask-for-context.mdc`.
+
 ## Quick Start
 
+0. **Context check** — ask if blocked ([protocol](./docs/context-request-protocol.md))
 1. Pick task ID from [docs/development-plan.md](./docs/development-plan.md)
 2. Read task **Done when** + [standards/definition-of-done.md](./docs/standards/definition-of-done.md)
 3. Read API in [docs/user-journey-api.md](./docs/user-journey-api.md) + [docs/api-endpoints.md](./docs/api-endpoints.md)
@@ -13,9 +18,9 @@ Follow on every task. Rules auto-load from `.cursor/rules/`; invoke skills from 
 7. Audit with `lancehive-page-audit`
 8. **Commit only if user asks** — use `write-commit-message`
 
-## 9-step workflow
+## 10-step workflow
 
-Discover → Scaffold → Data → State → Compose → Styles → Test → Verify → **Commit** (on request)
+**Context** → Discover → Scaffold → Data → State → Compose → Styles → Test → Verify → **Commit** (on request)
 
 Full guide: [docs/agentic-workflow.md](./docs/agentic-workflow.md)
 
@@ -48,6 +53,8 @@ Full guide: [docs/agentic-workflow.md](./docs/agentic-workflow.md)
 | Rule | Scope |
 |------|-------|
 | `lancehive-core.mdc` | Always |
+| `ai-token-guard.mdc` | Always — minimal reads/output |
+| `ask-for-context.mdc` | Always |
 | `security.mdc` | Always |
 | `commit-messages.mdc` | when committing |
 | `build-page-workflow.mdc` | `src/features/**` |

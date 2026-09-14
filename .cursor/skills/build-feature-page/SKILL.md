@@ -7,14 +7,16 @@ description: Builds a LanceHive feature page using the 8-step agentic workflow. 
 
 ## Before coding
 
+0. **Context check** — if task ID, API, design, or environment is unclear after reading docs/code, ask the owner per `docs/context-request-protocol.md` (do not guess)
 1. Read task **Done when** in `docs/development-plan.md`
 2. Read `docs/standards/definition-of-done.md` (universal + task-type)
 3. Read API in `docs/user-journey-api.md`
 4. Check `docs/pages-and-routes.md` for names
 
-## 8-step checklist
+## 10-step checklist
 
 ```
+- [ ] 0. Context — asked owner if blocked; explored docs/code first
 - [ ] 1. Discover — task AC, API, similar page, shadcn inventory
 - [ ] 2. Scaffold — features/{Name}/ structure
 - [ ] 3. Data layer — hooks + query-keys + apiRequest

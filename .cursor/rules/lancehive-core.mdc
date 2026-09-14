@@ -15,4 +15,6 @@ alwaysApply: true
 
 **Agent tone:** Explain issues in plain English. Avoid jargon unless defined.
 
+**Token guard:** `ai-token-guard.mdc` — minimum reads, docs, and output. One development-plan task block at a time.
+
 **Before shipping any page or audit:** Run the five-area review in `audit-deliverables.mdc` and produce all required deliverables.

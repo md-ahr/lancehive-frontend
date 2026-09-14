@@ -1,0 +1,111 @@
+---
+description: "[Global] Token guard — minimum context, reads, and output for correct fixes"
+alwaysApply: true
+---
+
+# AI Token Guard
+
+Solve the task with the least context, tool output, and file reads needed for a **correct** fix.
+
+Hard requirement for every chat. Follow unless the user explicitly overrides in the current message.
+
+## Enforcement
+
+- Treat limits as hard stops, not suggestions.
+- Before exceeding a limit, ask the user in one short sentence (`ask-for-context.mdc`).
+- If enough evidence exists to answer or patch, stop reading and act.
+- Do not restate that rules were read unless the next action follows them.
+
+## LanceHive bootstrap (once per session)
+
+1. `lancehive-core.mdc` + this file are always on — do not reread every turn.
+2. Load **one** doc from the index below when needed — never read all of `docs/`.
+3. Build tasks: **only** the current task block in `docs/development-plan.md`.
+4. API work: one `docs/api/endpoints/{group}.md` + matching schema — not the whole API tree.
+5. Activate skills only when the task requires them — not preemptively.
+6. Path-scoped rules apply automatically — do not reread if already in context.
+
+Do not reread rules, skills, or docs already loaded this session unless the repo area changed or the user asked to reread.
+
+## Doc index (load on demand)
+
+| Need | Read only |
+|------|-----------|
+| Current task | One block in `docs/development-plan.md` |
+| Persona flows | `docs/user-journey-api.md` — relevant section |
+| API contract | `docs/api-endpoints.md` → one endpoint file + schema |
+| DoD / tests | One file from `docs/standards/` matching the task type |
+| Routes / pages | `docs/pages-and-routes.md` — relevant section |
+| Context protocol | `docs/context-request-protocol.md` — when blocked only |
+
+Files over 200 lines: locate heading first, read that section only.
+
+## Core search and read rules
+
+- Start with one narrow search (component name, hook name, route path, task ID).
+- Prefer `Grep` with `head_limit` over broad repo exploration.
+- Read only the needed fragment when a fragment is enough.
+- Reuse context already gathered — no rereading without a new reason.
+- After editing, reread only the changed fragment unless a new hypothesis appears.
+- Do not inspect adjacent files unless the current file clearly cannot contain the fix.
+
+## Small change mode
+
+For a local fix in one component, one hook, one test, or one doc block:
+
+1. One narrow search → one candidate file → one fragment.
+2. Second file only if the first clearly cannot contain the fix.
+3. No parallel reads of multiple large candidates before localizing.
+4. Fix at the first strong match before searching wider.
+
+Priority: minimum context → minimum output → minimum file count.
+
+## Output rules
+
+- Keep answers brief; prefer result over narration.
+- No long reports for small fixes.
+- No progress commentary ("checking", "now editing", "found").
+- For simple fixes: 1–3 short lines after the edit.
+- Do not paste large code blocks when the file was edited in-repo.
+- Do not echo full rule files or docs unless the user asked for the text.
+
+## Hard stops
+
+- Do not read 10+ files "just in case".
+- Do not loop on the same large file.
+- Do not parallel-read several large candidates before localizing.
+- Do not widen scope after root cause is found.
+- Do not print full diffs for files over 200 lines — use narrow path or hunk.
+- Do not load optional skills unless the operation needs them.
+
+## Intent triage before tools
+
+| Intent | Action |
+|--------|--------|
+| Answer-only / review-only | No project tools unless needed to read cited code |
+| Exact-error follow-up | Named file + previous hunk only |
+| Local edit | One narrow lookup → patch |
+| Implementation task | Current development-plan block + scoped rules + minimal reads |
+| Investigation | Minimum evidence plan; stop when found |
+
+## Answer-only completion footer
+
+When the task is **answer-only or review-only** (no repo edits): end the response with exactly:
+
+```
+ai-token-guard.mdc: left unchanged — answer-only, no edits.
+```
+
+Do not append this footer after implementation tasks that changed files.
+
+## Subagent offload (when available)
+
+Delegate broad exploration to `explore` subagents when finding usages across many files or reading 3+ files. Give a narrow objective; main agent patches from the handoff.
+
+Skip subagents for literal one-file / one-hunk edits with known target lines.
+
+## Patch discipline
+
+- Smallest viable patch — no adjacent cleanup unless the user asked.
+- User wording is the contract; do not expand scope silently.
+- New error after patch: inspect new error + changed hunk only.

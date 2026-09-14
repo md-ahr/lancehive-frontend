@@ -8,7 +8,7 @@ Human-readable API contract for the LanceHive MVP (`/api/v1`). This is the **des
 
 | Doc | Purpose |
 |-----|---------|
-| [user-journey.md](./user-journey.md) | Step-by-step API flows by persona (auth → delivery → billing) |
+| [user-journey-api.md](../user-journey-api.md) | Step-by-step API flows by persona (auth → delivery → billing) |
 | [conventions.md](./conventions.md) | Base URL, auth, headers, pagination, data types |
 | [errors.md](./errors.md) | Error catalog with HTTP status + machine-readable `code` |
 | [schemas/](./schemas/) | Reusable JSON shapes (Resources) |
@@ -56,11 +56,11 @@ Human-readable API contract for the LanceHive MVP (`/api/v1`). This is the **des
 | Reports (workspace) | [endpoints/reports.md](./endpoints/reports.md) | `/workspace/stats`, `/reports/*`, `/report-exports/*` | Planned |
 | Admin — Reports | [endpoints/admin-reports.md](./endpoints/admin-reports.md) | `/admin/reports/*`, `/admin/report-exports/*` | Planned |
 
-Schema: [schemas/report.md](./schemas/report.md). Tasks: [implementation-tasks.md](../multi-tenant/implementation-tasks.md) Phase 19.
+Schema: [schemas/report.md](./schemas/report.md). Tasks: [development-plan.md](../development-plan.md) (reporting phase).
 
 ## Coverage (MVP cross-check)
 
-54 endpoints documented across 13 endpoint files — all routes from `implementation-tasks.md` Phases 3–15 plus Phase 18 settings (planned).
+54 endpoints documented across 13 endpoint files — synced from backend MVP phases; see [development-plan.md](../development-plan.md) for frontend build order.
 
 | File | Endpoints |
 |------|-----------|

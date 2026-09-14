@@ -1,0 +1,29 @@
+---
+description: Ask the project owner when required context is missing — do not guess on scope, API, design, or environment
+alwaysApply: true
+---
+
+# Context Request Protocol
+
+Full doc: `docs/context-request-protocol.md`
+
+## Ask me before coding when
+
+- Task ID, scope, or **Done when** is unclear
+- API contract, product behavior, or design is missing from docs
+- Local backend, credentials, or test data is needed to verify behavior
+- Docs conflict, or a wrong guess would cause significant rework
+
+## Do not ask when
+
+- Answer is in `docs/development-plan.md`, `docs/api/`, `docs/standards/`, or the codebase
+- A similar feature already shows the pattern — copy structure, not logic
+- Detail is internal only (naming, file layout) with no product impact
+
+## How to ask
+
+1. Say what you checked and what is blocked
+2. Ask specific question(s) in one message — batch related items
+3. Offer a default: "If no preference, I'll …"
+
+Never guess on product scope, API shapes, or design. Explore docs and code first; then ask.

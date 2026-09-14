@@ -12,4 +12,6 @@ Canonical standards wired into the agentic workflow. Read before implementing an
 | [security.md](./security.md) | Auth, secrets, XSS, headers | `security.mdc` |
 | [commit-messages.md](./commit-messages.md) | Conventional Commits | `commit-messages.mdc` |
 
-**Workflow:** Discover → Scaffold → Data → State → Compose → Styles → **Test** → Verify → Audit → **Commit** (when user asks)
+**Workflow:** **Context** → Discover → Scaffold → Data → State → Compose → Styles → **Test** → Verify → Audit → **Commit** (when user asks)
+
+**Context:** Agents ask the owner when blocked — [context-request-protocol.md](../context-request-protocol.md)

@@ -10,7 +10,7 @@ Tests are **required** for every development-plan task unless marked "Tests: N/A
 
 | File | Purpose |
 |------|---------|
-| `vitest.config.ts` | jsdom, `@/` alias, setupFiles |
+| `vite.config.ts` (`test` block) | jsdom, `@/` alias, setupFiles |
 | `src/test/setup.ts` | RTL cleanup, MSW lifecycle |
 | `src/test/test-utils.tsx` | `renderWithProviders()` — QueryClient, Router |
 | `src/test/msw/server.ts` | MSW server instance |

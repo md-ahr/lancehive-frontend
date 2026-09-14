@@ -3,6 +3,8 @@
 | Rule | Scope | Doc |
 |------|-------|-----|
 | [lancehive-core.mdc](./lancehive-core.mdc) | Always | — |
+| [ai-token-guard.mdc](./ai-token-guard.mdc) | Always | — |
+| [ask-for-context.mdc](./ask-for-context.mdc) | Always | [context-request-protocol.md](../../docs/context-request-protocol.md) |
 | [security.mdc](./security.mdc) | Always | [security.md](../../docs/standards/security.md) |
 | [build-page-workflow.mdc](./build-page-workflow.mdc) | `src/features/**` | [agentic-workflow.md](../../docs/agentic-workflow.md) |
 | [coding-conventions.mdc](./coding-conventions.mdc) | `src/**` | [coding-conventions.md](../../docs/standards/coding-conventions.md) |

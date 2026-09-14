@@ -8,6 +8,10 @@ alwaysApply: false
 
 Follow in order. Standards: `docs/standards/`. Task AC: `docs/development-plan.md`.
 
+## 0. Context
+- If scope, API, design, or env is unclear after docs + codebase search → ask owner (`docs/context-request-protocol.md`)
+- Do not guess on product or API decisions
+
 ## 1. Discover
 - Read task **Done when** in development-plan
 - Read API contract in `docs/user-journey-api.md`

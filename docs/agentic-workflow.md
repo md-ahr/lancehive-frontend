@@ -33,6 +33,23 @@ Every page and feature is composed from pre-built UI components (shadcn/ui primi
 
 Follow this order for every new page or feature. **Do not skip steps.**
 
+### 0. Context Check — Ask Before Guessing
+
+Before discovery or coding, confirm you have enough context. Full protocol: [context-request-protocol.md](./context-request-protocol.md).
+
+**Ask the project owner when:**
+
+- Task ID or **Done when** is unclear
+- API, UX, or business rules are not in `docs/` or the codebase
+- You need a running backend, credentials, Figma, or test data to proceed correctly
+- Documentation conflicts or a wrong assumption would waste significant rework
+
+**Explore first (do not ask):** `development-plan.md` → API docs → similar `src/features/` page → standards.
+
+**How to ask:** State what you checked, what is blocked, specific question(s) in one message, and a recommended default.
+
+Re-run this step whenever new ambiguity appears mid-task.
+
 ### 1. Discover Before Coding
 
 - Read the task ID and **Done when** in `docs/development-plan.md`.
