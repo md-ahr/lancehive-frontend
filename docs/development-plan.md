@@ -166,15 +166,15 @@
 
 ---
 
-## Phase 1 — Auth & Session (P0)
+## Phase 1 — Auth & Session (P0) ✅
 
 ### A-01 — Auth types + query keys
 **Folder:** `features/Auth/` | **Depends:** F-06
 
 **Done when:**
-- [ ] `types.ts`: LoginRequest, LoginResponse, MeResponse re-exports
-- [ ] `query-keys.ts`: `authKeys.me()`, `authKeys.all`
-- [ ] Unit test: query key shapes
+- [x] `types.ts`: LoginRequest, LoginResponse, MeResponse re-exports
+- [x] `query-keys.ts`: `authKeys.me()`, `authKeys.all`
+- [x] Unit test: query key shapes
 
 ---
 
@@ -182,8 +182,8 @@
 **API:** `POST /login`, `POST /logout` | **Depends:** A-01, F-05
 
 **Done when:**
-- [ ] Login stores token via auth-storage; logout clears token
-- [ ] Hook tests: success, 401 error, logout clears token
+- [x] Login stores token via auth-storage; logout clears token
+- [x] Hook tests: success, 401 error, logout clears token
 
 ---
 
@@ -191,8 +191,8 @@
 **API:** `GET /me` | **Depends:** A-01
 
 **Done when:**
-- [ ] Query enabled only when token present
-- [ ] Hook tests: success with memberships; 401 error
+- [x] Query enabled only when token present
+- [x] Hook tests: success with memberships; 401 error
 
 ---
 
@@ -200,8 +200,8 @@
 **Folder:** `features/Auth/stores/` | **Depends:** F-05
 
 **Done when:**
-- [ ] Store holds token presence / hydrated flag only — not `MeResponse`
-- [ ] Unit test: hydrate from storage
+- [x] Store holds token presence / hydrated flag only — not `MeResponse`
+- [x] Unit test: hydrate from storage
 
 ---
 
@@ -209,9 +209,9 @@
 **Depends:** A-02, A-08
 
 **Done when:**
-- [ ] zod: email + password required
-- [ ] Four states: loading submit, validation error, API error, success redirect
-- [ ] Integration tests: render form, validation fail, login success (MSW)
+- [x] zod: email + password required
+- [x] Four states: loading submit, validation error, API error, success redirect
+- [x] Integration tests: render form, validation fail, login success (MSW)
 
 ---
 
@@ -219,8 +219,8 @@
 **API:** `POST /forgot-password` | **Depends:** A-08
 
 **Done when:**
-- [ ] Always shows success message (no email enumeration)
-- [ ] Integration tests: submit success
+- [x] Always shows success message (no email enumeration)
+- [x] Integration tests: submit success
 
 ---
 
@@ -228,9 +228,9 @@
 **API:** `POST /reset-password` | **Depends:** A-08
 
 **Done when:**
-- [ ] Fields: token, email, password, password_confirmation
-- [ ] zod password match validation
-- [ ] Integration tests: validation fail, success
+- [x] Fields: token, email, password, password_confirmation
+- [x] zod password match validation
+- [x] Integration tests: validation fail, success
 
 ---
 
@@ -238,8 +238,8 @@
 **Depends:** F-08
 
 **Done when:**
-- [ ] Centered card layout for public auth pages
-- [ ] Component test: renders children
+- [x] Centered card layout for public auth pages
+- [x] Component test: renders children
 
 ---
 
@@ -247,8 +247,8 @@
 **Depends:** A-03
 
 **Done when:**
-- [ ] Redirects to `/login` when no token or useMe fails
-- [ ] Integration test: redirect when unauthenticated
+- [x] Redirects to `/login` when no token or useMe fails
+- [x] Integration test: redirect when unauthenticated
 
 ---
 
@@ -256,8 +256,8 @@
 **Depends:** A-03
 
 **Done when:**
-- [ ] super_admin → `/admin`; client → `/portal`; freelancer → `/app`
-- [ ] Integration test: each role redirects correctly (MSW me fixtures)
+- [x] super_admin → `/admin`; client → `/portal`; freelancer → `/app`
+- [x] Integration test: each role redirects correctly (MSW me fixtures)
 
 ---
 
@@ -265,10 +265,10 @@
 **Depends:** A-05–A-07
 
 **Done when:**
-- [ ] `/login`, `/forgot-password`, `/reset-password` wired with AuthLayout
-- [ ] Integration test: routes render correct pages
+- [x] `/login`, `/forgot-password`, `/reset-password` wired with AuthLayout
+- [x] Integration test: routes render correct pages
 
-**Phase 1 exit:** Login → /me → persona redirect; logout; 401 → login.
+**Phase 1 exit:** Login → /me → persona redirect; logout; 401 → login. ✅
 
 ---
 
