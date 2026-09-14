@@ -1,13 +1,18 @@
 import { Route, Routes } from 'react-router-dom'
 
+import { RequireFreelancer } from '@/features/Auth/components/RequireFreelancer'
 import { AuthLayout } from '@/features/Auth/components/AuthLayout'
 import { PersonaRedirect } from '@/features/Auth/components/PersonaRedirect'
 import { RequireAuth } from '@/features/Auth/components/RequireAuth'
 import { ForgotPasswordPage } from '@/features/Auth/pages/ForgotPasswordPage'
 import { LoginPage } from '@/features/Auth/pages/LoginPage'
 import { ResetPasswordPage } from '@/features/Auth/pages/ResetPasswordPage'
+import { AppLayout } from '@/features/Layout/components/AppLayout'
+import { DashboardPage } from '@/features/Layout/pages/DashboardPage'
 import { NotFoundPage } from '@/features/Layout/pages/NotFoundPage'
 import { PlaceholderPage } from '@/features/Layout/pages/PlaceholderPage'
+import { UserSettingsPage } from '@/features/Settings/pages/UserSettingsPage'
+import { WorkspaceSettingsPage } from '@/features/Settings/pages/WorkspaceSettingsPage'
 
 export function AppRoutes() {
   return (
@@ -21,8 +26,21 @@ export function AppRoutes() {
       </Route>
 
       <Route element={<RequireAuth />}>
-        <Route path="/app" element={<PlaceholderPage title="App Dashboard" />} />
-        <Route path="/app/*" element={<PlaceholderPage title="App" />} />
+        <Route element={<RequireFreelancer />}>
+          <Route path="/app" element={<AppLayout />}>
+            <Route index element={<DashboardPage />} />
+            <Route path="clients" element={<PlaceholderPage title="Clients" />} />
+            <Route path="clients/:id" element={<PlaceholderPage title="Client detail" />} />
+            <Route path="projects" element={<PlaceholderPage title="Projects" />} />
+            <Route path="projects/:id" element={<PlaceholderPage title="Project detail" />} />
+            <Route path="invoices" element={<PlaceholderPage title="Invoices" />} />
+            <Route path="invoices/:id" element={<PlaceholderPage title="Invoice detail" />} />
+            <Route path="members" element={<PlaceholderPage title="Members" />} />
+            <Route path="settings" element={<UserSettingsPage />} />
+            <Route path="workspace" element={<WorkspaceSettingsPage />} />
+            <Route path="subscription" element={<PlaceholderPage title="Subscription" />} />
+          </Route>
+        </Route>
 
         <Route path="/portal" element={<PlaceholderPage title="Portal Dashboard" />} />
         <Route path="/portal/*" element={<PlaceholderPage title="Portal" />} />

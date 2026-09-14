@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { apiRequest } from '@/lib/api'
 import { clearToken } from '@/lib/auth-storage'
+import { clearFreelancerId } from '@/lib/workspace-storage'
 
 import type { MessageResponse } from '../types'
 
@@ -16,6 +17,7 @@ export function useLogout() {
     mutationFn: () => apiRequest<MessageResponse>('/logout', { method: 'POST' }),
     onSuccess: () => {
       clearToken()
+      clearFreelancerId()
       setHasToken(false)
       queryClient.removeQueries({ queryKey: authKeys.all })
     },

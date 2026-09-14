@@ -275,39 +275,50 @@
 ## Phase 2 — App Shell (P1)
 
 ### S-01 — useUpdateMeSettings | **API:** `PATCH /me/settings`
-**Done when:** Hook + MSW tests; invalidates `authKeys.me()`
+**Done when:**
+- [x] Hook + MSW tests; invalidates `authKeys.me()`
 
 ### S-02 — Workspace settings hooks | **API:** `GET/PATCH /workspace/settings`
-**Done when:** Hook + MSW tests; owner-only mutation guard in hook caller
+**Done when:**
+- [x] Hook + MSW tests; owner-only mutation guard in hook caller
 
 ### S-03 — WorkspaceProvider
-**Done when:** Provides `freelancerId`; persists selection; integration test context value
+**Done when:**
+- [x] Provides `freelancerId`; persists selection; integration test context value
 
 ### S-04 — WorkspaceSwitcher
-**Done when:** Dropdown when memberships > 1; hidden when single; component test
+**Done when:**
+- [x] Dropdown when memberships > 1; hidden when single; component test
 
 ### S-05 — AppLayout
-**Done when:** Sidebar nav, breadcrumb, switcher, ReadOnlyBanner when read_only; component test
+**Done when:**
+- [x] Sidebar nav, breadcrumb, switcher, ReadOnlyBanner when read_only; component test
 
 ### S-06 — UserMenu
-**Done when:** Settings link, logout; component test
+**Done when:**
+- [x] Settings link, logout; component test
 
 ### S-07 — RequireFreelancer + read-only guard
-**Done when:** Blocks tenant routes for wrong role; write hooks respect read_only; integration tests
+**Done when:**
+- [x] Blocks tenant routes for wrong role; write hooks respect read_only; integration tests
 
 ### S-08 — DashboardPage
-**Done when:** Placeholder cards; loading skeleton; integration test render
+**Done when:**
+- [x] Placeholder cards; loading skeleton; integration test render
 
 ### S-09 — UserSettingsPage
-**Done when:** Form timezone/locale; four states; integration tests
+**Done when:**
+- [x] Form timezone/locale; four states; integration tests
 
 ### S-10 — WorkspaceSettingsPage
-**Done when:** Owner/admin gate; form PATCH; 403 handled; integration tests
+**Done when:**
+- [x] Owner/admin gate; form PATCH; 403 handled; integration tests
 
 ### S-11 — Wire `/app/*`
-**Done when:** Nested routes under AppLayout + RequireFreelancer; integration test navigation
+**Done when:**
+- [x] Nested routes under AppLayout + RequireFreelancer; integration test navigation
 
-**Phase 2 exit:** Workspace switcher sets header; read-only banner works.
+**Phase 2 exit:** Workspace switcher sets header; read-only banner works. ✅
 
 ---
 

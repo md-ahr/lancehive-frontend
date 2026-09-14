@@ -1,7 +1,9 @@
 import { screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { useAuthStore } from '@/features/Auth/stores/useAuthStore'
+import { setToken } from '@/lib/auth-storage'
 import { renderWithProviders } from '@/test/test-utils'
 
 import { AppRoutes } from './index'
@@ -32,6 +34,34 @@ describe('AppRoutes', () => {
 
     await waitFor(() => {
       expect(screen.getByRole('heading', { name: 'Sign in' })).toBeInTheDocument()
+    })
+  })
+
+  it('renders app dashboard for authenticated freelancer', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/app' })
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'Dashboard' })).toBeInTheDocument()
+    })
+  })
+
+  it('navigates to user settings from app shell', async () => {
+    setToken('test-token')
+    useAuthStore.setState({ hasToken: true, isHydrated: true })
+
+    renderWithProviders(<AppRoutes />, { route: '/app' })
+
+    await waitFor(() => {
+      expect(screen.getByText('Settings')).toBeInTheDocument()
+    })
+
+    await userEvent.click(screen.getAllByText('Settings')[0])
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: 'User settings' })).toBeInTheDocument()
     })
   })
 

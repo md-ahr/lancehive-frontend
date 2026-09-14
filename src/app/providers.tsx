@@ -4,6 +4,7 @@ import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@ta
 import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'sonner'
 
+import { TooltipProvider } from '@/components/ui/tooltip'
 import { clearToken } from '@/lib/auth-storage'
 import { getErrorCode } from '@/lib/errors'
 
@@ -41,10 +42,12 @@ export function AppProviders({ children }: AppProvidersProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        {children}
-        <Toaster richColors position="top-right" />
-      </BrowserRouter>
+      <TooltipProvider>
+        <BrowserRouter>
+          {children}
+          <Toaster richColors position="top-right" />
+        </BrowserRouter>
+      </TooltipProvider>
     </QueryClientProvider>
   )
 }

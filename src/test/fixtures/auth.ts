@@ -71,6 +71,14 @@ export function makeMeResponse(role: UserRole): MeResponse {
         freelancer_id: 42,
         user_id: user.id,
         role: 'owner',
+        freelancer: {
+          id: 42,
+          name: 'Jane Studio',
+          slug: 'jane-studio',
+          status: 'active',
+          owner_user_id: user.id,
+          ...timestamps,
+        },
         created_at: timestamps.created_at,
         updated_at: timestamps.updated_at,
       },
@@ -91,5 +99,60 @@ export function makeMeResponse(role: UserRole): MeResponse {
     },
     client_memberships: [],
     active_client: null,
+  }
+}
+
+export function makeMultiMembershipMeResponse(): MeResponse {
+  const base = makeMeResponse('freelancer')
+
+  return {
+    ...base,
+    memberships: [
+      ...base.memberships,
+      {
+        id: 2,
+        freelancer_id: 99,
+        user_id: base.user.id,
+        role: 'admin',
+        freelancer: {
+          id: 99,
+          name: 'Second Studio',
+          slug: 'second-studio',
+          status: 'active',
+          owner_user_id: base.user.id,
+          ...timestamps,
+        },
+        created_at: timestamps.created_at,
+        updated_at: timestamps.updated_at,
+      },
+    ],
+  }
+}
+
+export function makeReadOnlyMeResponse(): MeResponse {
+  const base = makeMeResponse('freelancer')
+
+  return {
+    ...base,
+    subscription: {
+      status: 'read_only',
+      plan_name: 'Starter',
+      read_only: true,
+      trial_ends_at: null,
+    },
+  }
+}
+
+export function makeMemberRoleMeResponse(): MeResponse {
+  const base = makeMeResponse('freelancer')
+
+  return {
+    ...base,
+    memberships: [
+      {
+        ...base.memberships[0],
+        role: 'member',
+      },
+    ],
   }
 }
