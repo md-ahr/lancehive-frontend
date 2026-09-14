@@ -2,8 +2,9 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 
-import { ErrorAlert } from './ErrorAlert'
 import { ApiError } from '@/lib/errors'
+
+import { ErrorAlert } from './ErrorAlert'
 
 describe('ErrorAlert', () => {
   it('renders user message from ApiError', () => {

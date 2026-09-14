@@ -1,8 +1,9 @@
 import { screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
-import { AppRoutes } from './index'
 import { renderWithProviders } from '@/test/test-utils'
+
+import { AppRoutes } from './index'
 
 describe('AppRoutes', () => {
   it('renders public login placeholder', () => {

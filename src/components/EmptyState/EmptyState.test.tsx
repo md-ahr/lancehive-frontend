@@ -2,8 +2,9 @@ import { render, screen } from '@testing-library/react'
 import { Inbox } from 'lucide-react'
 import { describe, expect, it } from 'vitest'
 
-import { EmptyState } from './EmptyState'
 import { Button } from '@/components/ui/button'
+
+import { EmptyState } from './EmptyState'
 
 describe('EmptyState', () => {
   it('renders title, description, icon, and action', () => {

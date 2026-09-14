@@ -1,6 +1,7 @@
+import type { ApiErrorBody } from '@/types/api'
+
 import { getToken } from '../auth-storage'
 import { ApiError } from '../errors'
-import type { ApiErrorBody } from '@/types/api'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'
 
@@ -36,4 +37,3 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
 
   return response.json() as Promise<T>
 }
-

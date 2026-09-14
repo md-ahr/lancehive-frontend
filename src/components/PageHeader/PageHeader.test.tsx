@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
-import { PageHeader } from './PageHeader'
 import { Button } from '@/components/ui/button'
+
+import { PageHeader } from './PageHeader'
 
 describe('PageHeader', () => {
   it('renders title, description, and actions', () => {
